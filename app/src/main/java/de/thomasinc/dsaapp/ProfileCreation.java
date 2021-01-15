@@ -32,7 +32,7 @@ public class ProfileCreation extends AppCompatActivity {
                 final String charname = nameInput.getText().toString();
                 final String filename = charname+fileEnding;
 
-                Character c = new Character(charname);
+                Character c = new Character.CharBuilder(charname).build();
 
 
 

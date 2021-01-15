@@ -93,16 +93,16 @@ public class CharacterBaseValueInput extends AppCompatActivity {
             public void onClick(View v){
 
                 //eigl model
-                Character c_new = new Character(
-                        Integer.parseInt(editMU.getText().toString()),
-                        Integer.parseInt(editKL.getText().toString()),
-                        Integer.parseInt(editIN.getText().toString()),
-                        Integer.parseInt(editCH.getText().toString()),
-                        Integer.parseInt(editFF.getText().toString()),
-                        Integer.parseInt(editGE.getText().toString()),
-                        Integer.parseInt(editKO.getText().toString()),
-                        Integer.parseInt(editKK.getText().toString())
-                );
+                Character c_new = new Character.CharBuilder("placeholder")
+                        .mu(Integer.parseInt(editMU.getText().toString()))
+                        .kl(Integer.parseInt(editKL.getText().toString()))
+                        .in(Integer.parseInt(editIN.getText().toString()))
+                        .ch(Integer.parseInt(editCH.getText().toString()))
+                        .ff(Integer.parseInt(editFF.getText().toString()))
+                        .ge(Integer.parseInt(editGE.getText().toString()))
+                        .ko(Integer.parseInt(editKO.getText().toString()))
+                        .kk(Integer.parseInt(editKK.getText().toString()))
+                        .build();
 
                 JSONObject charJobj = new CharToJson(c_new).getJobj();
                 try {
