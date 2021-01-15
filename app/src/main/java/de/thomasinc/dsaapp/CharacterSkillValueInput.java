@@ -22,7 +22,7 @@ public class CharacterSkillValueInput extends AppCompatActivity {
 
         Bundle b = getIntent().getExtras();
         this.kat = b.getString("Kat");
-        HashMap<String,Skill> skills = Util.getSkills(getApplicationContext(), kat);
+        HashMap<String,Skill> skills = Util.getSkillsOfCat(getApplicationContext(), kat);
 
         ArrayList<String> skillsString = new ArrayList<>(skills.keySet());
 

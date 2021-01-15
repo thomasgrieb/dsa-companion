@@ -20,7 +20,7 @@ public class Dice extends AppCompatActivity {
         final String kat = b.getString("Kat");
         final String comp_neg = "-";
 
-        final HashMap<String,Skill> skills = Util.getSkills(getApplicationContext(),kat);
+        final HashMap<String,Skill> skills = Util.getSkillsOfCat(getApplicationContext(),kat);
 
         final Formula formula = skills.get(skill).getFormula();
 
