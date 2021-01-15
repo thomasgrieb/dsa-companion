@@ -1,13 +1,16 @@
 package de.thomasinc.dsaapp;
+
 import java.util.HashMap;
 
 /**
  * Defines the Character object
  * Every character object has three groups of main attributes:
  *  one unique name, nine character attributes and an arbitrary number of skills
- * The name is represented by a {@link String}
- * The character attributes (also called abilities) are represented by nine {@link Integer}s
- * The skills represented by a {@link HashMap}
+ *  The name is represented by a {@link String}
+ *  The character attributes (also called abilities) are represented by nine {@link Integer}s
+ *  The skills represented by a {@link HashMap}
+ * Uses the Builder Pattern due to number of parameters
+ * TODO: Consider combining abilities into HashMap?
  */
 public class Character {
 
@@ -19,11 +22,11 @@ public class Character {
     private int ge;
     private int ko;
     private int kk;
-    private HashMap<String, Integer> abilityMap = new HashMap<>();
+    private final HashMap<String, Integer> abilityMap = new HashMap<>();
     private HashMap<Skill, Integer> skillMap = new HashMap<>();
     private String name;
 
-    /**
+    /*
     public Character(String name, int mu, int kl, int in, int ch, int ff, int ge, int ko, int kk,
                      HashMap<Skill, Integer> skills) {
         this.name = name;
@@ -47,7 +50,12 @@ public class Character {
     }
      */
 
-    private Character(){ }
+    /**
+     * Empty Constructor
+     */
+    private Character() {
+    }
+
 
     public String getName() {
         return name;
@@ -121,8 +129,17 @@ public class Character {
         this.kk = kk;
     }
 
+    public HashMap<Skill, Integer> getSkillmap() {
+        return skillMap;
+    }
+
+    public void setSkillMap(HashMap<Skill, Integer> skillMap) {
+        this.skillMap = skillMap;
+    }
+
     /**
      * Implements find and return method for the abilityMap
+     *
      * @param s
      * @return ability score or 0 if nonexistant
      */
@@ -134,27 +151,20 @@ public class Character {
         }
     }
 
-    public HashMap<Skill, Integer> getSkillmap(){
-        return skillMap;
-    }
-
-    public void setSkillMap(HashMap<Skill, Integer> skillMap) {
-        this.skillMap = skillMap;
-    }
-
     /**
      * creates an array representation of the ability scores
+     *
      * @return {@link Integer} array of ability scores
      */
-    public int[] charBaseValuesToArray(){
-        int[] ar = {mu,kl,in,ch,ff,ge,ko,kk};
+    public int[] charBaseValuesToArray() {
+        int[] ar = {mu, kl, in, ch, ff, ge, ko, kk};
         return ar;
     }
 
     /**
      * Builder Pattern
      */
-    public static class CharBuilder{
+    public static class CharBuilder {
         private int mu;
         private int kl;
         private int in;
@@ -163,62 +173,68 @@ public class Character {
         private int ge;
         private int ko;
         private int kk;
-        private HashMap<String, Integer> abilityMap = new HashMap<>();
+        private final HashMap<String, Integer> abilityMap = new HashMap<>();
         private HashMap<Skill, Integer> skillMap = new HashMap<>();
         private final String name;
 
-        public CharBuilder(String name){
+        public CharBuilder(String name) {
             this.name = name;
+            this.mu = 8;
+            this.kl = 8;
+            this.in = 8;
+            this.ch = 8;
+            this.ff = 8;
+            this.ge = 8;
+            this.ko = 8;
+            this.kk = 8;
         }
 
-        public CharBuilder mu(int mu){
+        public CharBuilder mu(int mu) {
             this.mu = mu;
             return this;
         }
 
-        public CharBuilder kl(int kl){
+        public CharBuilder kl(int kl) {
             this.kl = kl;
             return this;
         }
 
-        public CharBuilder in(int in){
+        public CharBuilder in(int in) {
             this.in = in;
             return this;
         }
 
-        public CharBuilder ch(int ch){
+        public CharBuilder ch(int ch) {
             this.ch = ch;
             return this;
         }
 
-        public CharBuilder ff(int ff){
+        public CharBuilder ff(int ff) {
             this.ff = ff;
             return this;
         }
 
-        public CharBuilder ge(int ge){
+        public CharBuilder ge(int ge) {
             this.ge = ge;
             return this;
         }
 
-        public CharBuilder ko(int ko){
+        public CharBuilder ko(int ko) {
             this.ko = ko;
             return this;
         }
 
-        public CharBuilder kk(int kk){
+        public CharBuilder kk(int kk) {
             this.kk = kk;
             return this;
         }
 
-        public CharBuilder skillMap(HashMap<Skill, Integer> skillMap){
+        public CharBuilder skillMap(HashMap<Skill, Integer> skillMap) {
             this.skillMap = skillMap;
             return this;
         }
 
-
-
-        public Character build(){
+        public Character build() {
             Character c = new Character();
             c.name = this.name;
             c.mu = this.mu;
