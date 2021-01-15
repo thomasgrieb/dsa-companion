@@ -9,6 +9,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.DSAApp">
+        <activity android:name=".CharacterInputDialog"/>
+        <activity android:name=".CharacterSkillValueInput" />
+        <activity android:name=".Dice" />
+        <activity android:name=".Skills" />
+        <activity android:name=".SkillsKat" />
+        <activity android:name=".CharacterBaseValueInput" />
+        <activity android:name=".chooseSkill" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
