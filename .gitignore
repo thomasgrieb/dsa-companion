@@ -18,3 +18,11 @@ local.properties
 /app/build
 /app/proguard-rules.pro
 /app/libs
+/app/.gitignore
+/build.gradle
+/gradle.properties
+/gradlew.bat
+/gradlew
+/settings.gradle
+/gradle/wrapper/gradle-wrapper.jar
+/gradle/wrapper/gradle-wrapper.properties
