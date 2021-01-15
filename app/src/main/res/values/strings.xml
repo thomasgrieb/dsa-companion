@@ -1,0 +1,34 @@
+<resources>
+    <string name="app_name">DSA Calculator</string>
+    <string name="titlescreen_title">DSA Automatisches Würfeln</string>
+    <string name="titlescreen_button0">Charaktererstellung</string>
+    <string name="titlescreen_button1">Würfeln</string>
+    <string name="titlescreen_button2">Fähigkeiten</string>
+    <string name="titlescreen_button_exit">Exit</string>
+    <string name="title_activity_choose_skill">Fähigkeit auswählen</string>
+
+    <string name="button_confirm">Bestätigen</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="charscreen_title">Charakter</string>
+    <string name="charscreen_text">Bitte hier Charakterwerte angeben und \nbestätigen zum
+        Speichern. \nEs sind lediglch Werte von 0 bis 19 gestattet.</string>
+    <string name="charscreen_mu">MU</string>
+    <string name="charscreen_kl">KL</string>
+    <string name="charscreen_in">IN</string>
+    <string name="charscreen_ch">CH</string>
+    <string name="charscreen_ff">FF</string>
+    <string name="charscreen_ge">GE</string>
+    <string name="charscreen_ko">KO</string>
+    <string name="charscreen_kk">KK</string>
+
+    <string name="dice_thorw_button">Würfeln</string>
+
+    <string name="skill_base_value">0</string>
+
+    <string name="char_title">Charaktererstellung</string>
+    <string name="char_button_base_values">Eigenschaftswerte</string>
+    <string name="char_button_skill_values">Fähigkeitenwerte</string>
+    <string name="profile_bar_description">Profile</string>
+
+</resources>

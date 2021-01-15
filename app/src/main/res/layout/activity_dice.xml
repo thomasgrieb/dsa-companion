@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Dice">
+
+    <Button
+        android:id="@+id/throwDiceButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="48dp"
+        android:text="@string/dice_thorw_button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/throwSkill"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="skill"
+        android:textColor="@color/borderColor"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.19" />
+
+    <TextView
+        android:id="@+id/throwFormular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="formular"
+        android:textColor="@color/borderColor"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="@+id/throwSkill"
+        app:layout_constraintStart_toStartOf="@+id/throwSkill"
+        app:layout_constraintTop_toBottomOf="@+id/throwSkill" />
+
+    <TextView
+        android:id="@+id/throwResult1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="92dp"
+        android:text=""
+        android:textColor="@color/borderColor"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/throwSkill"
+        app:layout_constraintStart_toStartOf="@+id/throwSkill"
+        app:layout_constraintTop_toBottomOf="@+id/throwFormular" />
+
+    <TextView
+        android:id="@+id/throwCompensate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="44dp"
+        android:text=""
+        android:textColor="@color/borderColor"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="@+id/throwResult1"
+        app:layout_constraintStart_toStartOf="@+id/throwResult1"
+        app:layout_constraintTop_toBottomOf="@+id/throwResult1" />
+
+    <TextView
+        android:id="@+id/throwResult0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:text=""
+        android:textSize="20sp"
+        android:textColor="@color/borderColor"
+        app:layout_constraintBottom_toBottomOf="@+id/throwResult1"
+        app:layout_constraintEnd_toStartOf="@+id/throwResult1"
+        app:layout_constraintTop_toTopOf="@+id/throwResult1" />
+
+    <TextView
+        android:id="@+id/throwResult2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text=""
+        android:textSize="20sp"
+        android:textColor="@color/borderColor"
+        app:layout_constraintBottom_toBottomOf="@+id/throwResult1"
+        app:layout_constraintStart_toEndOf="@+id/throwResult1"
+        app:layout_constraintTop_toTopOf="@+id/throwResult1" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
