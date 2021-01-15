@@ -65,9 +65,10 @@ public class Util {
      *  the skill as {@link String} is the key and a {@link Skill} object its value.
      * @param context application context needed for filepath
      * @param kat
-     * @return {@link HashMap} object containing all skills of category kat
+     * @return {@link HashMap} object containing all skills of category kat as
+     *  {@link String}:{@link Skill} pairs
      */
-    public static HashMap<String,Skill> getSkills(Context context, String kat){
+    public static HashMap<String,Skill> getSkillsOfCat(Context context, String kat){
         HashMap<String,Skill> skillmap = new HashMap<>();
         try{
             JSONObject obj = new JSONObject(readSkillsJson(context)).getJSONObject(kat);
@@ -88,7 +89,39 @@ public class Util {
     }
 
     /**
-     * Reads existing charfile (json) from the  appropriate file folder
+     * Creates a {@link HashMap} containing {@link Skill}:{@link Integer}(0) pairs for every
+     *  existing skill in skill.json in order to initialize an empty characters skill sheet.
+     * Uses the {@link #readSkillsJson(Context)} method to get a list of categories, loops over the
+     *  result and uses the {@link #getSkillsOfCat(Context, String)} method to create a
+     *  {@link Skill} array of all skills in that category. Lastly, the list is appended to a
+     *  predefined {@link HashMap} and each key is assigned the value 0.
+     * The method is supposed to be used after creating a new profile through the profile creating
+     *  functionality in order to complete the creation of the corresponding {@link Character}
+     *  object.
+     * @param context
+     * @return {@link HashMap} of {@link Skill}:{@link Integer} pairs
+     */
+    public static HashMap<Skill,Integer> initializeSkillValueMap(Context context){
+        HashMap<Skill,Integer> skillValueMap = new HashMap<>();
+        try{
+            JSONObject obj = new JSONObject((readSkillsJson(context)));
+            Iterator<String> itCat = obj.keys();
+            Skill[] skillsOfCat;
+            while (itCat.hasNext()){
+                skillsOfCat = getSkillsOfCat(context,itCat.next()).values().toArray(new Skill[0]);
+                for (int i = 0; i< skillsOfCat.length;i++){
+                    skillValueMap.put(skillsOfCat[i], 0);
+                }
+            }
+        } catch (JSONException er){
+            er.printStackTrace();
+        }
+        return skillValueMap;
+    }
+
+    /**
+     * Reads existing charfile (json) from the  appropriate file folder and creates corresponding
+     *  {@link Character} object.
      * @param context application context needed for filepath
      * @return {@link Character} object with the saved attributes
      */
@@ -114,7 +147,16 @@ public class Util {
         } catch (JSONException ex) {
             ex.printStackTrace();
         }
-        return new Character(l.get(0), l.get(1), l.get(2), l.get(3), l.get(4), l.get(5), l.get(6), l.get(7));
+        return new Character.CharBuilder("placeholder")
+                .mu(l.get(0))
+                .kl(l.get(1))
+                .in(l.get(2))
+                .ch(l.get(3))
+                .ff(l.get(4))
+                .ge(l.get(5))
+                .ko(l.get(6))
+                .kk(l.get(7))
+                .build();
     }
 
     /**
