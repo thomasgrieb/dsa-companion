@@ -36,5 +36,16 @@ public class CharacterInputDialog extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        Button profileCreationButton = (Button) findViewById(R.id.charButtonProfileCreation);
+
+        profileCreationButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(CharacterInputDialog.this,
+                        ProfileCreation.class);
+                startActivity(intent);
+            }
+        });
     }
 }

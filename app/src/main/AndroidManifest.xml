@@ -11,6 +11,7 @@
         android:theme="@style/Theme.DSAApp">
         <activity android:name=".CharacterInputDialog"/>
         <activity android:name=".CharacterSkillValueInput" />
+        <activity android:name=".ProfileCreation" />
         <activity android:name=".Dice" />
         <activity android:name=".Skills" />
         <activity android:name=".SkillsKat" />
