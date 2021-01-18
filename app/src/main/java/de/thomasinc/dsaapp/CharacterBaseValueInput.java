@@ -22,7 +22,7 @@ import java.io.Writer;
  * Creates an {@link EditText} Object for every value, 8 in total and collects them in an array. The
  *  possible values are limited by a filter implemented with {@link MinMaxValueFilter}.
  * Creates a confirmation {@link Button} that only becomes enabled if all fields are not empty,
- *  surveyed by a {@link TextWatcher}.
+ *  surveyed by a {@link TextWatcher} (or starts enabled if values are already set).
  * Loads up existing character json file, if any exist.
  * Upon pressing the confirmation button, the values get transformed into a {@link Character} object
  *  and saved as "mycharacter.json" in the corresponding files directory.
@@ -62,6 +62,8 @@ public class CharacterBaseValueInput extends AppCompatActivity {
             }
         }
 
+        //If values are already set, confirmation button is enabled from the start due to this code
+        // snippet
         if(!Util.checkIfAnyEmptyArray(textArray)){
             confirmBtn.setEnabled(true);
         }
