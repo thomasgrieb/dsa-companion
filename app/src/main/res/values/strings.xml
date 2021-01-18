@@ -1,4 +1,5 @@
 <resources>
+    #Titlescreen
     <string name="app_name">DSA Calculator</string>
     <string name="titlescreen_title">DSA Automatisches Würfeln</string>
     <string name="titlescreen_button0">Charaktererstellung</string>
@@ -29,6 +30,14 @@
     <string name="char_title">Charaktererstellung</string>
     <string name="char_button_base_values">Eigenschaftswerte</string>
     <string name="char_button_skill_values">Fähigkeitenwerte</string>
+    <string name="char_button_profile_creation">Profilerstellung</string>
     <string name="profile_bar_description">Profile</string>
+
+    <string name="prof_creat_text_title">Profilerstellung</string>
+    <string name="prof_creat_edittext_name">Bitte Charactername eingeben</string>
+    <string name="prof_creat_text_desc">Hier kann ein neues Profil für einen Charakter angelegt
+        werden. Entsprechende Charakterwerte können in den anderen Fenester angegeben werden.
+    </string>
+
 
 </resources>
