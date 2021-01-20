@@ -19,7 +19,7 @@ import de.thomasinc.dsaapp.data.Skill;
 
 public class Util {
 
-    public static HashMap<String,HashMap<String,Skill>> readSkills(Context context){
+    public static HashMap<String,HashMap<String,Skill>> makeSkillMap(Context context){
         HashMap<String,HashMap<String,Skill>> skills = new HashMap<>();
 
         try {
@@ -27,14 +27,17 @@ public class Util {
             Iterator<String> it= obj.keys();
             while(it.hasNext()) {
                 String cat = it.next();
+                JSONObject subobj = obj.getJSONObject(cat);
+                System.out.println("Kat: "+cat);
                 skills.put(cat, new HashMap<>());
-                Iterator<String> itSk = obj.getJSONObject(cat).keys();
+                Iterator<String> itSk = subobj.keys();
                 String entry;
                 Formula f;
                 String[] fAr;
-                while (it.hasNext()) {
-                    entry = it.next();
-                    fAr = obj.getString(entry).split("-");
+                while (itSk.hasNext()) {
+                    entry = itSk.next();
+                    System.out.println("entry: "+entry);
+                    fAr = subobj.getString(entry).split("-");
                     f = new Formula(fAr[0], fAr[1], fAr[2]);
                     skills.get(cat).put(entry, new Skill(entry, f));
                 }
