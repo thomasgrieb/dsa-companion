@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import de.thomasinc.dsaapp.data.Skill;
+import de.thomasinc.dsaapp.ui.dice.DiceActivity;
 import de.thomasinc.dsaapp.util.Util;
 
 public class Skills extends AppCompatActivity {
@@ -38,7 +39,7 @@ public class Skills extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 System.out.println("klick");
                 String value = adapter.getItem(position);
-                Intent intent = new Intent(Skills.this, Dice.class);
+                Intent intent = new Intent(Skills.this, DiceActivity.class);
                 intent.putExtra("Skill", value);
                 intent.putExtra("Kat",kat);
                 startActivity(intent);
