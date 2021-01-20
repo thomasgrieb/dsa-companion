@@ -1,4 +1,4 @@
-package de.thomasinc.dsaapp;
+package de.thomasinc.dsaapp.data;
 
 import java.util.HashMap;
 

@@ -1,16 +1,17 @@
-package de.thomasinc.dsaapp;
+package de.thomasinc.dsaapp.util;
 import android.content.Context;
 import android.widget.EditText;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+
+import de.thomasinc.dsaapp.data.Character;
+import de.thomasinc.dsaapp.data.Formula;
+import de.thomasinc.dsaapp.data.Skill;
 
 /**
  * Utility helper class that implements various methods needed in several places of the app
@@ -18,28 +19,35 @@ import java.util.Iterator;
 
 public class Util {
 
-    /**
-     * Reads the skills from the json file saved in the apps' assets folder
-     * @param context application context needed for filepath
-     * @return {@link String} of skills
-     */
-    public static String readSkillsJson(Context context){
-        String json = null;
+    public static HashMap<String,HashMap<String,Skill>> readSkills(Context context){
+        HashMap<String,HashMap<String,Skill>> skills = new HashMap<>();
+
         try {
-            InputStream file = context.getAssets().open("skills.json");
-            int size = file.available();
-            byte[] buffer = new byte[size];
-            file.read(buffer);
-            file.close();
-            json = new String(buffer, StandardCharsets.UTF_8);
-        } catch (IOException ex) {
-            ex.printStackTrace();
+            JSONObject obj = new JSONObject(Json.readSkillsJson(context));
+            Iterator<String> it= obj.keys();
+            while(it.hasNext()) {
+                String cat = it.next();
+                skills.put(cat, new HashMap<>());
+                Iterator<String> itSk = obj.getJSONObject(cat).keys();
+                String entry;
+                Formula f;
+                String[] fAr;
+                while (it.hasNext()) {
+                    entry = it.next();
+                    fAr = obj.getString(entry).split("-");
+                    f = new Formula(fAr[0], fAr[1], fAr[2]);
+                    skills.get(cat).put(entry, new Skill(entry, f));
+                }
+            }
+        } catch (JSONException er) {
+            er.printStackTrace();
         }
-        return json;
+
+        return skills;
     }
 
     /**
-     * Uses the {@link String} generated in {@link #readSkillsJson(Context)} to generate a
+     * Uses the {@link String} generated in {@link Json#readSkillsJson(Context)} to generate a
      *  {@link JSONObject}, where the keys are the skill categories and its values the skills of
      *  the category. Creates {@link ArrayList} of skill categories.
      * @param context application context needed for filepath
@@ -48,7 +56,7 @@ public class Util {
     public static String[] getSkillKats(Context context){
         ArrayList<String> kats = new ArrayList<>();
         try {
-            JSONObject obj = new JSONObject(readSkillsJson(context));
+            JSONObject obj = new JSONObject(Json.readSkillsJson(context));
             Iterator<String> it= obj.keys();
             while(it.hasNext()){
                 kats.add(it.next());
@@ -61,7 +69,7 @@ public class Util {
 
     /**
      * Reads the skills of a specific category from a {@link JSONObject} generated from the String
-     *  from {@link #readSkillsJson(Context)}. Collects them in a {@link HashMap}, where the name of
+     *  from {@link Json#readSkillsJson(Context)}. Collects them in a {@link HashMap}, where the name of
      *  the skill as {@link String} is the key and a {@link Skill} object its value.
      * @param context application context needed for filepath
      * @param kat
@@ -71,7 +79,7 @@ public class Util {
     public static HashMap<String,Skill> getSkillsOfCat(Context context, String kat){
         HashMap<String,Skill> skillmap = new HashMap<>();
         try{
-            JSONObject obj = new JSONObject(readSkillsJson(context)).getJSONObject(kat);
+            JSONObject obj = new JSONObject(Json.readSkillsJson(context)).getJSONObject(kat);
             Iterator<String> it = obj.keys();
             String entry;
             Formula f;
@@ -91,7 +99,7 @@ public class Util {
     /**
      * Creates a {@link HashMap} containing {@link Skill}:{@link Integer}(0) pairs for every
      *  existing skill in skill.json in order to initialize an empty characters skill sheet.
-     * Uses the {@link #readSkillsJson(Context)} method to get a list of categories, loops over the
+     * Uses the {@link Json#readSkillsJson(Context)} method to get a list of categories, loops over the
      *  result and uses the {@link #getSkillsOfCat(Context, String)} method to create a
      *  {@link Skill} array of all skills in that category. Lastly, the list is appended to a
      *  predefined {@link HashMap} and each key is assigned the value 0.
@@ -104,7 +112,7 @@ public class Util {
     public static HashMap<Skill,Integer> initializeSkillValueMap(Context context){
         HashMap<Skill,Integer> skillValueMap = new HashMap<>();
         try{
-            JSONObject obj = new JSONObject((readSkillsJson(context)));
+            JSONObject obj = new JSONObject((Json.readSkillsJson(context)));
             Iterator<String> itCat = obj.keys();
             Skill[] skillsOfCat;
             while (itCat.hasNext()){
@@ -117,55 +125,6 @@ public class Util {
             er.printStackTrace();
         }
         return skillValueMap;
-    }
-
-    /**
-     * Reads existing charfile (json) from the  appropriate file folder and creates corresponding
-     *  {@link Character} object.
-     * @param context application context needed for filepath
-     * @return {@link Character} object with the saved attributes
-     */
-    public static Character readCharFromJson(Context context) {
-        ArrayList<Integer> l = new ArrayList<>();
-        String json = null;
-        try {
-            InputStream file = context.openFileInput("myCharacter.json"); //const-class?
-            int size = file.available();
-            byte[] buffer = new byte[size];
-            file.read(buffer);
-            file.close();
-            json = new String(buffer, StandardCharsets.UTF_8);
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-        try {
-            JSONObject obj = new JSONObject(json);
-            Iterator<String> it = obj.keys();
-            while (it.hasNext()) {
-                l.add(obj.getInt(it.next()));
-            }
-        } catch (JSONException ex) {
-            ex.printStackTrace();
-        }
-        return new Character.CharBuilder("placeholder")
-                .mu(l.get(0))
-                .kl(l.get(1))
-                .in(l.get(2))
-                .ch(l.get(3))
-                .ff(l.get(4))
-                .ge(l.get(5))
-                .ko(l.get(6))
-                .kk(l.get(7))
-                .build();
-    }
-
-    /**
-     * Writes a Character object to a json file, derives the filename from the charactername
-     * @param context
-     * @param c
-     */
-    public static void writeCharToJson(Context context, Character c) {
-
     }
 
     /**

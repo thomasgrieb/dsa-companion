@@ -1,4 +1,5 @@
-package de.thomasinc.dsaapp;
+package de.thomasinc.dsaapp.data;
+
 /**
  * Skill-Object class
  * Portrays an individual skill by saving its name as String and the formula to calculate it as

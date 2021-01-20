@@ -1,10 +1,14 @@
-package de.thomasinc.dsaapp;
+package de.thomasinc.dsaapp.util;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import de.thomasinc.dsaapp.data.Character;
 
 public class CharToJson {
 
     private JSONObject jobj = new JSONObject();
+
+    //TODO integrate into Character class as method CharToJObj
 
     public CharToJson(Character character){
         JSONObject jobj = new JSONObject();

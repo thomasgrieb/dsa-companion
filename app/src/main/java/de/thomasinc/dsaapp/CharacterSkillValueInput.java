@@ -9,6 +9,9 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import de.thomasinc.dsaapp.data.Skill;
+import de.thomasinc.dsaapp.util.Util;
+
 public class CharacterSkillValueInput extends AppCompatActivity {
 
     private String kat = null;
@@ -22,7 +25,7 @@ public class CharacterSkillValueInput extends AppCompatActivity {
 
         Bundle b = getIntent().getExtras();
         this.kat = b.getString("Kat");
-        HashMap<String,Skill> skills = Util.getSkillsOfCat(getApplicationContext(), kat);
+        HashMap<String, Skill> skills = Util.getSkillsOfCat(getApplicationContext(), kat);
 
         ArrayList<String> skillsString = new ArrayList<>(skills.keySet());
 

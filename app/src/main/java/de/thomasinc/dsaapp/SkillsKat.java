@@ -8,6 +8,8 @@ import android.widget.ArrayAdapter;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import de.thomasinc.dsaapp.util.Util;
+
 /**
  * Fills activity_skills_kat.xml window with the necessary skill categories
  */

@@ -1,4 +1,4 @@
-package de.thomasinc.dsaapp;
+package de.thomasinc.dsaapp.util;
 import android.text.InputFilter;
 import android.text.Spanned;
 

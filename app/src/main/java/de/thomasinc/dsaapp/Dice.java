@@ -8,6 +8,12 @@ import android.widget.TextView;
 import java.util.HashMap;
 import java.util.Random;
 
+import de.thomasinc.dsaapp.data.Character;
+import de.thomasinc.dsaapp.data.Formula;
+import de.thomasinc.dsaapp.data.Skill;
+import de.thomasinc.dsaapp.util.Util;
+import de.thomasinc.dsaapp.util.Json;
+
 public class Dice extends AppCompatActivity {
 
     @Override
@@ -20,7 +26,7 @@ public class Dice extends AppCompatActivity {
         final String kat = b.getString("Kat");
         final String comp_neg = "-";
 
-        final HashMap<String,Skill> skills = Util.getSkillsOfCat(getApplicationContext(),kat);
+        final HashMap<String, Skill> skills = Util.getSkillsOfCat(getApplicationContext(),kat);
 
         final Formula formula = skills.get(skill).getFormula();
 
@@ -34,7 +40,7 @@ public class Dice extends AppCompatActivity {
         diceButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Character character = Util.readCharFromJson(getApplicationContext());
+                Character character = Json.readCharFromJson(getApplicationContext());
                 Random ran = new Random();
                 int over = 0;
                 String comp;

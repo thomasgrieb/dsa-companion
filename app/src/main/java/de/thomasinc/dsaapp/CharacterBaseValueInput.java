@@ -17,6 +17,12 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
 
+import de.thomasinc.dsaapp.data.Character;
+import de.thomasinc.dsaapp.util.CharToJson;
+import de.thomasinc.dsaapp.util.MinMaxValueFilter;
+import de.thomasinc.dsaapp.util.Util;
+import de.thomasinc.dsaapp.util.Json;
+
 /**
  * Implements functionality for the character value input window.
  * Creates an {@link EditText} Object for every value, 8 in total and collects them in an array. The
@@ -53,7 +59,7 @@ public class CharacterBaseValueInput extends AppCompatActivity {
         final Button confirmBtn = (Button) findViewById(R.id.buttonCharConf);
 
         if(Util.checkIfCharExists(context)){
-            Character c = Util.readCharFromJson(context);
+            Character c = Json.readCharFromJson(context);
             int[] cAr = c.charBaseValuesToArray();
 
             for(int i=0; i<8;i++) {

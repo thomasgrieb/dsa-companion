@@ -8,6 +8,9 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import de.thomasinc.dsaapp.data.Character;
+import de.thomasinc.dsaapp.util.Util;
+
 /**
  * Implements functionality for the profile creation window.
  * TODO: add support for Optolith json file - Users should be able to create a new Profile from

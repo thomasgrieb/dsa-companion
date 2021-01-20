@@ -1,4 +1,4 @@
-package de.thomasinc.dsaapp;
+package de.thomasinc.dsaapp.data;
 public class Formula {
     private String first;
     private String second;
