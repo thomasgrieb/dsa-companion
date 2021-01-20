@@ -1,14 +1,21 @@
-package de.thomasinc.dsaapp;
+package de.thomasinc.dsaapp.ui.main;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.os.Bundle;
 import android.view.View;
 import android.content.Intent;
 import android.widget.Button;
 
-public class MainActivity extends AppCompatActivity {
+import de.thomasinc.dsaapp.CharacterInputDialog;
+import de.thomasinc.dsaapp.R;
+import de.thomasinc.dsaapp.SkillsKat;
+import de.thomasinc.dsaapp.ui.DsaView;
+
+public class MainActivity extends AppCompatActivity implements DsaView {
 
     private final boolean values = false;
+    private MainPresenter presenter = new MainPresenter(this);
 
 
     @Override
@@ -21,9 +28,7 @@ public class MainActivity extends AppCompatActivity {
         throwButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Intent intent = new Intent(MainActivity.this, SkillsKat.class);
-                intent.putExtra("values",values);
-                startActivity(intent);
+                startActivity(new Intent(MainActivity.this, SkillsKat.class));
             }
         });
 
@@ -46,4 +51,8 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onError(String errormsg) {
+
+    }
 }
