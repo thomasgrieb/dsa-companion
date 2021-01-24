@@ -1,41 +1,80 @@
 package de.thomasinc.dsaapp.ui.dice;
 
 import android.content.Context;
-import android.widget.ArrayAdapter;
 
 import java.util.HashMap;
+import java.util.Set;
 
 import de.thomasinc.dsaapp.data.DiceModel;
-import de.thomasinc.dsaapp.data.DsaModel;
 import de.thomasinc.dsaapp.data.Skill;
 import de.thomasinc.dsaapp.ui.DsaPresenter;
-import de.thomasinc.dsaapp.ui.DsaView;
+import de.thomasinc.dsaapp.util.Json;
+import de.thomasinc.dsaapp.util.Util;
 
+
+/**
+ * Presenter to {@link DiceActivity}.
+ */
+
+// TODO: Maybe move more functionality (extracting info form skillMap) to model?
 public class DicePresenter implements DsaPresenter {
 
     private DiceActivity view;
-    private DsaModel model = new DiceModel();
-    //TODO: passing context is suboptimal, look into alternatives
+    private final DiceModel model;
+    private String currentcat;
+
+    /**
+     * Links the view
+     * Initializes model with character and skillmap (from context).
+     * @param view corresponding view
+     * @param context corresponding model
+     */
+
+    // TODO: passing context is suboptimal, look into alternatives
     //  https://stackoverflow.com/questions/34303510/does-the-presenter-having-knowledge-of-the-activity-context-a-bad-idea-in-the
     //  https://www.journaldev.com/20644/android-mvp-dagger2
-    private Context context;
-
     public DicePresenter(DiceActivity view, Context context){
         this.view = view;
-        this.context = context;
+        //TODO: errorhandling
+        this.model = new DiceModel(Json.readCharFromJson(context),Util.makeSkillMap(context));
     }
 
-    public void fillSkillCatDropdown(HashMap<String, HashMap<String, Skill>> skillMap){
-        view.fillSkillDropdown(skillMap.keySet().toArray());
+    /**
+     * Fills the category dropdown menu.
+     * Fetches the categories from the skillmap, converts them to a {@link String} array and calls
+     * {@link DiceActivity#fillCatDropdown}.
+     */
+    public void fillCatDropdown(){
+        String [] catsAr = new String[model.getSkillMap().size()];
+        catsAr = model.getSkillMap().keySet().toArray(catsAr);
+        view.fillCatDropdown(catsAr);
     }
 
-    public void updateSkillLabel(){
+    /**
+     * Fills the category dropdown menu.
+     * Fetches the skills from the skillmap, converts them to a {@link String} array and calls
+     * {@link DiceActivity#fillSkillDropdown}.
+     * @param cat currently chosen category, used to set current category
+     */
+    public void fillSkillDropdown(String cat){
+        // TODO: currentcat better?
+        currentcat = cat;
+        Set<String> skills =model.getSkillMap().get(cat).keySet();
+        String[] skillsAr = new String[skills.size()];
+        skillsAr = skills.toArray(skillsAr);
+        view.fillSkillDropdown(skillsAr);
 
     }
 
-    public void fillSkillDropdown(){
-
+    /**
+     * Updates the skill information field by calling {@link DiceActivity#setSkillInfo}.
+     * @param skill chosen skill
+     */
+    public void updateSkillLabel(String skill){
+        view.setSkillInfo(skill);
+        view.setSkillFormula(model.getSkillMap().get(currentcat).get(skill).getFormula().print());
     }
+
 
     @Override
     public void onCreate() {
@@ -44,6 +83,6 @@ public class DicePresenter implements DsaPresenter {
 
     @Override
     public void onDestroy() {
-
+        view = null;
     }
 }

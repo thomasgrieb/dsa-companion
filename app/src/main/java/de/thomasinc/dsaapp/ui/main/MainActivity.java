@@ -11,6 +11,7 @@ import de.thomasinc.dsaapp.CharacterInputDialog;
 import de.thomasinc.dsaapp.R;
 import de.thomasinc.dsaapp.SkillsKat;
 import de.thomasinc.dsaapp.ui.DsaView;
+import de.thomasinc.dsaapp.ui.dice.DiceActivity;
 
 public class MainActivity extends AppCompatActivity implements DsaView {
 
@@ -28,7 +29,7 @@ public class MainActivity extends AppCompatActivity implements DsaView {
         throwButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                startActivity(new Intent(MainActivity.this, SkillsKat.class));
+                startActivity(new Intent(MainActivity.this, DiceActivity.class));
             }
         });
 

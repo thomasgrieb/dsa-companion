@@ -3,6 +3,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
@@ -14,44 +15,69 @@ import de.thomasinc.dsaapp.R;
 import de.thomasinc.dsaapp.data.Character;
 import de.thomasinc.dsaapp.data.Formula;
 import de.thomasinc.dsaapp.data.Skill;
-import de.thomasinc.dsaapp.ui.DsaPresenter;
 import de.thomasinc.dsaapp.ui.DsaView;
 import de.thomasinc.dsaapp.util.Util;
 import de.thomasinc.dsaapp.util.Json;
 
+
+/**
+ * Implements the view for rolling the dice on a specific skill. Users must first select a category
+ * from the first dropdown menu, then a skill from that category from the second dropdown.
+ */
 public class DiceActivity extends AppCompatActivity implements DsaView {
 
-    private DsaPresenter presenter;
-    private Spinner skillCatsDropdown = findViewById(R.id.throwSkillCatDropdown);
-    private Spinner skillsDropdown = findViewById(R.id.throwSkillDropdown);
+    private DicePresenter presenter;
+    private Spinner catsDropdown;
+    private Spinner skillsDropdown;
+    private TextView skillInfo;
+    private TextView skillFormula;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dice);
 
-        presenter = new DicePresenter(this, getApplicationContext());
+        catsDropdown =  (Spinner) findViewById(R.id.throwCatDropdown);
+        skillsDropdown =  (Spinner) findViewById(R.id.throwSkillDropdown);
+        skillInfo = (TextView) findViewById(R.id.throwSkill);
+        skillFormula = (TextView) findViewById(R.id.throwFormular);
 
-        TextView skillInfo = (TextView) findViewById(R.id.throwSkill);
-        skillInfo.setText(skill);
-        TextView skillFormular = (TextView) findViewById(R.id.throwFormular);
-        skillFormular.setText(formula.print());
+        presenter = new DicePresenter(this, getApplicationContext());
+        presenter.fillCatDropdown();
 
         Button diceButton = (Button) findViewById(R.id.throwDiceButton);
 
-        Bundle b = getIntent().getExtras();
-        final String skill = b.getString("Skill");
-        final String kat = b.getString("Kat");
+        catsDropdown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                presenter.fillSkillDropdown(parent.getItemAtPosition(position).toString());
+            }
 
-        final HashMap<String, Skill> skills = Util.getSkillsOfCat(getApplicationContext(),kat);
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
 
-        final Formula formula = skills.get(skill).getFormula();
+            }
+        });
 
-        skillCatsDropdown.setOnItemSelectedListener();
+        skillsDropdown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                presenter.updateSkillLabel(parent.getItemAtPosition(position).toString());
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         diceButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                presenter
                 Character character = Json.readCharFromJson(getApplicationContext());
                 Random ran = new Random();
                 int over = 0;
@@ -87,6 +113,8 @@ public class DiceActivity extends AppCompatActivity implements DsaView {
                 compensateView.setText(comp);
             }
         });
+
+         */
     }
 
     private int checkForCrit(int dice){
@@ -100,13 +128,40 @@ public class DiceActivity extends AppCompatActivity implements DsaView {
         }
     }
 
-    public void fillSkillDropdown(String[] skills, String[] cats){
-        ArrayAdapter<String> skillCatsAdapter = new ArrayAdapter<String>(this,
+    /**
+     * Fills first dropdown
+     * @param cats skill categories
+     */
+    public void fillCatDropdown(String[] cats){
+        ArrayAdapter<String> catsAdapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_dropdown_item, cats);
-        skillCatsDropdown.setAdapter(skillCatsAdapter);
-        ArrayAdapter<String> skillsAdapter = new ArrayAdapter<String>(this,
+        catsDropdown.setAdapter(catsAdapter);
+    }
+
+    /**
+     * Fills second dropdown
+     * @param skills skills from chosen skill category
+     */
+    public void fillSkillDropdown(String[] skills){
+        ArrayAdapter<String> skillAdapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_dropdown_item, skills);
-        skillsDropdown.setAdapter(skillsAdapter);
+        skillsDropdown.setAdapter(skillAdapter);
+    }
+
+    /**
+     * Sets skill label
+     * @param skill chosen skill
+     */
+    public void setSkillInfo(String skill){
+        skillInfo.setText(skill);
+    }
+
+    /**
+     * Sets skill formula Label
+     * @param formula formula for chosen skill
+     */
+    public void setSkillFormula(String formula){
+        skillFormula.setText(formula);
     }
 
     @Override
