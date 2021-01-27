@@ -8,16 +8,12 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
-import java.util.HashMap;
+
 import java.util.Random;
 
 import de.thomasinc.dsaapp.R;
-import de.thomasinc.dsaapp.data.Character;
-import de.thomasinc.dsaapp.data.Formula;
-import de.thomasinc.dsaapp.data.Skill;
 import de.thomasinc.dsaapp.ui.DsaView;
 import de.thomasinc.dsaapp.util.Util;
-import de.thomasinc.dsaapp.util.Json;
 
 
 /**
@@ -77,23 +73,8 @@ public class DiceActivity extends AppCompatActivity implements DsaView {
             @Override
             public void onClick(View view) {
 
-                presenter
-                Character character = Json.readCharFromJson(getApplicationContext());
-                Random ran = new Random();
-                int over = 0;
-                String comp;
+                presenter.requestRoll();
 
-                int dice1 = ran.nextInt(20)+1;
-                int value1 = character.get(formula.getFirst());
-                over+=Util.largerThan(dice1,value1);
-
-                int dice2 = ran.nextInt(20)+1;
-                int value2 = character.get(formula.getSecond());
-                over+=Util.largerThan(dice2,value2);
-
-                int dice3 = ran.nextInt(20)+1;
-                int value3 = character.get(formula.getThird());
-                over+=Util.largerThan(dice3,value3);
 
                 TextView resultView0 = (TextView) findViewById(R.id.throwResult0);
                 resultView0.setText(String.valueOf(dice1));

@@ -2,11 +2,9 @@ package de.thomasinc.dsaapp.ui.dice;
 
 import android.content.Context;
 
-import java.util.HashMap;
 import java.util.Set;
 
 import de.thomasinc.dsaapp.data.DiceModel;
-import de.thomasinc.dsaapp.data.Skill;
 import de.thomasinc.dsaapp.ui.DsaPresenter;
 import de.thomasinc.dsaapp.util.Json;
 import de.thomasinc.dsaapp.util.Util;
@@ -21,7 +19,6 @@ public class DicePresenter implements DsaPresenter {
 
     private DiceActivity view;
     private final DiceModel model;
-    private String currentcat;
 
     /**
      * Links the view
@@ -58,12 +55,16 @@ public class DicePresenter implements DsaPresenter {
      */
     public void fillSkillDropdown(String cat){
         // TODO: currentcat better?
-        currentcat = cat;
-        Set<String> skills =model.getSkillMap().get(cat).keySet();
+        model.setCurrentCat(cat);
+        Set<String> skills =model.getSkillMap().get(model.getCurrentCat()).keySet();
         String[] skillsAr = new String[skills.size()];
         skillsAr = skills.toArray(skillsAr);
         view.fillSkillDropdown(skillsAr);
 
+    }
+
+    public void requestRoll(){
+        model.executeRoll();
     }
 
     /**
@@ -71,8 +72,15 @@ public class DicePresenter implements DsaPresenter {
      * @param skill chosen skill
      */
     public void updateSkillLabel(String skill){
-        view.setSkillInfo(skill);
-        view.setSkillFormula(model.getSkillMap().get(currentcat).get(skill).getFormula().print());
+        model.setCurrentSkill(skill);
+        view.setSkillInfo(model.getCurrentSkill());
+        view.setSkillFormula(
+                model.getSkillMap()
+                .get(model.getCurrentCat())
+                .get(model.getCurrentSkill())
+                .getFormula()
+                .print()
+        );
     }
 
 
