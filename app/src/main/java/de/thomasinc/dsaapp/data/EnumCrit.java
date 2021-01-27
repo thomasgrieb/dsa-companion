@@ -3,12 +3,12 @@ package de.thomasinc.dsaapp.data;
  * Currently useless enum for Crits
  **/
 
-enum Crit {
+enum CritOld {
     FAILURE("red"), SUCCESS("green"), NONE("black");
 
     private final String colorcode;
 
-    Crit(String colorcode) {
+    CritOld(String colorcode) {
         this.colorcode = colorcode;
     }
 
