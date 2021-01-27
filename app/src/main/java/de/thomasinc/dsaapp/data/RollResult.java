@@ -22,7 +22,24 @@ public class RollResult {
     private Crit thirdCrit;
     private int compensate;
 
-    public Roll(int first, int second)
+    public RollResult(int first, int second, int third, int compensate) {
+        this.first = first;
+        this.second = second;
+        this.third = third;
+        this.firstCrit = checkForCrit(first);
+        this.secondCrit = checkForCrit(second);
+        this.thirdCrit = checkForCrit(third);
+        this.compensate = compensate;
+    }
+
+    private Crit checkForCrit(int x){
+        if(x==20){
+            return Crit.Failure;
+        }else if (x==1){
+            return Crit.Success;
+        }
+        return null;
+    }
 
     public int getSecond() {
         return second;
@@ -40,27 +57,27 @@ public class RollResult {
         this.third = third;
     }
 
-    public boolean isFirstCrit() {
+    public Crit isFirstCrit() {
         return firstCrit;
     }
 
-    public void setFirstCrit(boolean firstCrit) {
+    public void setFirstCrit(Crit firstCrit) {
         this.firstCrit = firstCrit;
     }
 
-    public boolean isSecondCrit() {
+    public Crit isSecondCrit() {
         return secondCrit;
     }
 
-    public void setSecondCrit(boolean secondCrit) {
+    public void setSecondCrit(Crit secondCrit) {
         this.secondCrit = secondCrit;
     }
 
-    public boolean isThirdCrit() {
+    public Crit isThirdCrit() {
         return thirdCrit;
     }
 
-    public void setThirdCrit(boolean thirdCrit) {
+    public void setThirdCrit(Crit thirdCrit) {
         this.thirdCrit = thirdCrit;
     }
 

@@ -5,6 +5,7 @@ import android.content.Context;
 import java.util.Set;
 
 import de.thomasinc.dsaapp.data.DiceModel;
+import de.thomasinc.dsaapp.data.RollResult;
 import de.thomasinc.dsaapp.ui.DsaPresenter;
 import de.thomasinc.dsaapp.util.Json;
 import de.thomasinc.dsaapp.util.Util;
@@ -23,17 +24,18 @@ public class DicePresenter implements DsaPresenter {
     /**
      * Links the view
      * Initializes model with character and skillmap (from context).
-     * @param view corresponding view
+     *
+     * @param view    corresponding view
      * @param context corresponding model
      */
 
     // TODO: passing context is suboptimal, look into alternatives
     //  https://stackoverflow.com/questions/34303510/does-the-presenter-having-knowledge-of-the-activity-context-a-bad-idea-in-the
     //  https://www.journaldev.com/20644/android-mvp-dagger2
-    public DicePresenter(DiceActivity view, Context context){
+    public DicePresenter(DiceActivity view, Context context) {
         this.view = view;
         //TODO: errorhandling
-        this.model = new DiceModel(Json.readCharFromJson(context),Util.makeSkillMap(context));
+        this.model = new DiceModel(Json.readCharFromJson(context), Util.makeSkillMap(context));
     }
 
     /**
@@ -41,8 +43,8 @@ public class DicePresenter implements DsaPresenter {
      * Fetches the categories from the skillmap, converts them to a {@link String} array and calls
      * {@link DiceActivity#fillCatDropdown}.
      */
-    public void fillCatDropdown(){
-        String [] catsAr = new String[model.getSkillMap().size()];
+    public void fillCatDropdown() {
+        String[] catsAr = new String[model.getSkillMap().size()];
         catsAr = model.getSkillMap().keySet().toArray(catsAr);
         view.fillCatDropdown(catsAr);
     }
@@ -51,36 +53,51 @@ public class DicePresenter implements DsaPresenter {
      * Fills the category dropdown menu.
      * Fetches the skills from the skillmap, converts them to a {@link String} array and calls
      * {@link DiceActivity#fillSkillDropdown}.
+     *
      * @param cat currently chosen category, used to set current category
      */
-    public void fillSkillDropdown(String cat){
-        // TODO: currentcat better?
+    public void fillSkillDropdown(String cat) {
         model.setCurrentCat(cat);
-        Set<String> skills =model.getSkillMap().get(model.getCurrentCat()).keySet();
-        String[] skillsAr = new String[skills.size()];
-        skillsAr = skills.toArray(skillsAr);
-        view.fillSkillDropdown(skillsAr);
+        try {
+            Set<String> skills = model.getSkillMap().get(model.getCurrentCat()).keySet();
+            String[] skillsAr = new String[skills.size()];
+            skillsAr = skills.toArray(skillsAr);
+            view.fillSkillDropdown(skillsAr);
+        }catch (NullPointerException e) {
+            view.onError(e.toString());
+        }
 
     }
 
-    public void requestRoll(){
-        model.executeRoll();
+    public void requestRoll() {
+        if (model.getCurrentSkill() == null) {
+            view.onError("Keine Fähigkeit ausgewählt!");
+        } else {
+            model.executeRoll();
+            model.getLastresult()
+        }
     }
 
     /**
      * Updates the skill information field by calling {@link DiceActivity#setSkillInfo}.
+     *
      * @param skill chosen skill
      */
-    public void updateSkillLabel(String skill){
+    public void updateSkillLabel(String skill) {
         model.setCurrentSkill(skill);
-        view.setSkillInfo(model.getCurrentSkill());
-        view.setSkillFormula(
-                model.getSkillMap()
-                .get(model.getCurrentCat())
-                .get(model.getCurrentSkill())
-                .getFormula()
-                .print()
-        );
+        try {
+            view.setSkillInfo(model.getCurrentSkill());
+            view.setSkillFormula(
+                    model.getSkillMap()
+                            .get(model.getCurrentCat())
+                            .get(model.getCurrentSkill())
+                            .getFormula()
+                            .print()
+            );
+        } catch (NullPointerException e){
+            view.onError(e.toString());
+        }
+
     }
 
 
@@ -93,4 +110,5 @@ public class DicePresenter implements DsaPresenter {
     public void onDestroy() {
         view = null;
     }
+
 }

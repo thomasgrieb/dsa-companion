@@ -11,6 +11,9 @@ import de.thomasinc.dsaapp.util.Util;
  */
 public class Roll {
 
+    private int first;
+    private int second;
+    private int third;
 
     private final Random ran = new Random();
 
@@ -21,21 +24,21 @@ public class Roll {
         this.third = third;
     }
 
+    public RollResult roll(){
+        RollResult res = null;
 
-    public void roll(){
         int over = 0;
-        String comp;
 
         int dice1 = ran.nextInt(20)+1;
-        over+= Util.largerThan(dice1,value1);
+        over += largerThan(dice1,first);
 
         int dice2 = ran.nextInt(20)+1;
-        over+=Util.largerThan(dice2,value2);
+        over += largerThan(dice2,second);
 
         int dice3 = ran.nextInt(20)+1;
-        over+=Util.largerThan(dice3,value3);
+        over += largerThan(dice3,third);
 
-
+        return new RollResult(first,second,third,over);
     }
 
     public static int largerThan(int x,int y){

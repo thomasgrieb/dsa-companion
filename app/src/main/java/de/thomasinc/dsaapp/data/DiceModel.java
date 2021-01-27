@@ -6,8 +6,9 @@ public class DiceModel implements DsaModel{
 
     private final HashMap<String, HashMap<String,Skill>> skillMap;
     private final Character character;
-    private String currentCat ="";
-    private String currentSkill ="";
+    private String currentCat;
+    private String currentSkill;
+    private RollResult lastresult;
 
 
     public DiceModel(Character character, HashMap<String, HashMap<String,Skill>> skillMap){
@@ -16,10 +17,14 @@ public class DiceModel implements DsaModel{
     }
 
     public void executeRoll(){
+
         Formula formula = skillMap.get(currentCat).get(currentSkill).getFormula();
+
         int value1 = character.get(formula.getFirst());
         int value2 = character.get(formula.getSecond());
         int value3 = character.get(formula.getThird());
+
+        lastresult = new Roll(value1, value2, value3).roll();
     }
 
     public Character getCharacter() {
@@ -44,6 +49,10 @@ public class DiceModel implements DsaModel{
 
     public void setCurrentSkill(String currentSkill) {
         this.currentSkill = currentSkill;
+    }
+
+    public RollResult getLastresult() {
+        return lastresult;
     }
 
     @Override

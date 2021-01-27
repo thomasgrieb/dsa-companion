@@ -1,4 +1,5 @@
 package de.thomasinc.dsaapp.ui.dice;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -27,6 +28,10 @@ public class DiceActivity extends AppCompatActivity implements DsaView {
     private Spinner skillsDropdown;
     private TextView skillInfo;
     private TextView skillFormula;
+    private TextView resultView0;
+    private TextView resultView1;
+    private TextView resultView2;
+    private TextView compensateView;
 
 
 
@@ -39,6 +44,11 @@ public class DiceActivity extends AppCompatActivity implements DsaView {
         skillsDropdown =  (Spinner) findViewById(R.id.throwSkillDropdown);
         skillInfo = (TextView) findViewById(R.id.throwSkill);
         skillFormula = (TextView) findViewById(R.id.throwFormular);
+        resultView0 = (TextView) findViewById(R.id.throwResult0);
+        resultView1 = (TextView) findViewById(R.id.throwResult1);
+        resultView2 = (TextView) findViewById(R.id.throwResult2);
+        compensateView = (TextView) findViewById(R.id.throwCompensate);
+
 
         presenter = new DicePresenter(this, getApplicationContext());
         presenter.fillCatDropdown();
@@ -76,22 +86,14 @@ public class DiceActivity extends AppCompatActivity implements DsaView {
                 presenter.requestRoll();
 
 
-                TextView resultView0 = (TextView) findViewById(R.id.throwResult0);
-                resultView0.setText(String.valueOf(dice1));
                 resultView0.setTextColor(checkForCrit(dice1));
-                TextView resultView1 = (TextView) findViewById(R.id.throwResult1);
-                resultView1.setText(String.valueOf(dice2));
                 resultView1.setTextColor(checkForCrit(dice2));
-                TextView resultView2 = (TextView) findViewById(R.id.throwResult2);
-                resultView2.setText(String.valueOf(dice3));
                 resultView2.setTextColor(checkForCrit(dice3));
-                TextView compensateView = (TextView) findViewById(R.id.throwCompensate);
                 if(over==0){
                     comp = "0";
                 } else {
                     comp = "-"+String.valueOf(over);
                 }
-                compensateView.setText(comp);
             }
         });
 
@@ -145,8 +147,24 @@ public class DiceActivity extends AppCompatActivity implements DsaView {
         skillFormula.setText(formula);
     }
 
+    public void setResults(String first, String second, String third, String comp){
+        resultView0.setText(String.valueOf(first));
+        resultView1.setText(String.valueOf(second));
+        resultView2.setText(String.valueOf(third));
+        compensateView.setText(comp);
+    }
+
+
+
     @Override
     public void onError(String errormsg) {
-
+        //from
+        // https://stackoverflow.com/questions/2115758/how-do-i-display-an-alert-dialog-on-android
+        new AlertDialog.Builder(getApplicationContext())
+                .setTitle("Fehler")
+                .setMessage(errormsg)
+                .setNeutralButton(android.R.string.ok, null)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
     }
 }
