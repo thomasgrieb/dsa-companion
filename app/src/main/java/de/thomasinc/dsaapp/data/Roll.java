@@ -38,6 +38,14 @@ public class Roll {
 
     }
 
+    public static int largerThan(int x,int y){
+        int z = 0;
+        if(x > y){
+            z = x-y;
+        }
+        return z;
+    }
+
 
 
 }
