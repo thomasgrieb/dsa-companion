@@ -2,7 +2,8 @@ package de.thomasinc.dsaapp.data;
 
 
 /**
- * Simple object for saving the individual results of a roll performed by {@link Roll}
+ * Simple object for saving the individual results of a roll
+ * Automatically calculates crits and quality upon creation
  */
 public class RollResult {
 
@@ -14,22 +15,26 @@ public class RollResult {
         Success
     }
 
-    private int first;
-    private int second;
-    private int third;
-    private Crit firstCrit;
-    private Crit secondCrit;
-    private Crit thirdCrit;
-    private int compensate;
+    private final int first;
+    private final int second;
+    private final int third;
+    private final Crit firstCrit;
+    private final Crit secondCrit;
+    private final Crit thirdCrit;
+    private final int diff;
+    private final int quality;
+    private final int compensate;
 
-    public RollResult(int first, int second, int third, int compensate) {
+    public RollResult(int first, int second, int third, int diff, int bonus) {
         this.first = first;
         this.second = second;
         this.third = third;
         this.firstCrit = checkForCrit(first);
         this.secondCrit = checkForCrit(second);
         this.thirdCrit = checkForCrit(third);
-        this.compensate = compensate;
+        this.diff = diff+bonus;
+        this.compensate = this.diff < 0 ? Math.abs(this.diff) : 0;
+        this.quality = this.diff < 0 ? 0 : ((bonus-this.compensate)+2)/3;
     }
 
     private Crit checkForCrit(int x){
@@ -41,59 +46,35 @@ public class RollResult {
         return null;
     }
 
-    public int getSecond() {
-        return second;
+    public int getFirst() {
+        return first;
     }
 
-    public void setSecond(int second) {
-        this.second = second;
+    public int getSecond() {
+        return second;
     }
 
     public int getThird() {
         return third;
     }
 
-    public void setThird(int third) {
-        this.third = third;
-    }
-
     public Crit isFirstCrit() {
         return firstCrit;
-    }
-
-    public void setFirstCrit(Crit firstCrit) {
-        this.firstCrit = firstCrit;
     }
 
     public Crit isSecondCrit() {
         return secondCrit;
     }
 
-    public void setSecondCrit(Crit secondCrit) {
-        this.secondCrit = secondCrit;
-    }
-
     public Crit isThirdCrit() {
         return thirdCrit;
     }
 
-    public void setThirdCrit(Crit thirdCrit) {
-        this.thirdCrit = thirdCrit;
+    public int getQuality() {
+        return quality;
     }
 
     public int getCompensate() {
         return compensate;
-    }
-
-    public void setCompensate(int compensate) {
-        this.compensate = compensate;
-    }
-
-    public int getFirst() {
-        return first;
-    }
-
-    public void setFirst(int first) {
-        this.first = first;
     }
 }
