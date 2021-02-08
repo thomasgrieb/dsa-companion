@@ -73,8 +73,10 @@ public class DicePresenter implements DsaPresenter {
         if (model.getCurrentSkill() == null) {
             view.onError("Keine Fähigkeit ausgewählt!");
         } else {
-            model.executeRoll();
-            model.getLastresult()
+            RollResult res = model.roll();
+            view.setDice(res.getFirst(),res.getSecond(),res.getThird());
+            view.setCompensate(res.getCompensate());
+            view.setQuality(res.getQuality());
         }
     }
 
