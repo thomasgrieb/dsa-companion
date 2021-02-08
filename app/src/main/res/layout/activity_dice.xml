@@ -21,7 +21,7 @@
         android:id="@+id/throwSkill"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="skill"
+        android:text="@string/throwSkill"
         android:textColor="@color/borderColor"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -29,14 +29,14 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.383" />
+        app:layout_constraintVertical_bias="0.29000002" />
 
     <TextView
-        android:id="@+id/throwFormular"
+        android:id="@+id/throwFormula"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:text="formular"
+        android:text="@string/throwFormula"
         android:textColor="@color/borderColor"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="@+id/throwSkill"
@@ -47,22 +47,22 @@
         android:id="@+id/throwResult1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="92dp"
-        android:text=""
+        android:layout_marginTop="60dp"
+        android:text="@string/throwResult1"
         android:textColor="@color/borderColor"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="@+id/throwSkill"
         app:layout_constraintStart_toStartOf="@+id/throwSkill"
-        app:layout_constraintTop_toBottomOf="@+id/throwFormular" />
+        app:layout_constraintTop_toBottomOf="@+id/throwFormula" />
 
     <TextView
         android:id="@+id/throwCompensate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
-        android:text=""
+        android:layout_marginTop="24dp"
+        android:text="@string/throwCompensate"
         android:textColor="@color/borderColor"
-        android:textSize="24sp"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="@+id/throwResult1"
         app:layout_constraintStart_toStartOf="@+id/throwResult1"
         app:layout_constraintTop_toBottomOf="@+id/throwResult1" />
@@ -72,7 +72,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
-        android:text=""
+        android:text="@string/throwResult0"
         android:textColor="@color/borderColor"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/throwResult1"
@@ -84,7 +84,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:text=""
+        android:text="@string/throwResult2"
         android:textColor="@color/borderColor"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/throwResult1"
@@ -113,7 +113,48 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.39" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/throwQuality"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/throwQuality"
+        android:textColor="@color/borderColor"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/throwCompensate"
+        app:layout_constraintStart_toStartOf="@+id/throwCompensate"
+        app:layout_constraintTop_toBottomOf="@+id/throwCompensate" />
+
+    <TextView
+        android:id="@+id/throwDiceLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/throwDiceLabel"
+        app:layout_constraintBottom_toBottomOf="@+id/throwResult1"
+        app:layout_constraintEnd_toStartOf="@+id/throwResult1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/throwResult1" />
+
+    <TextView
+        android:id="@+id/throwDiffLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/throwDiffLabel"
+        app:layout_constraintBottom_toBottomOf="@+id/throwCompensate"
+        app:layout_constraintEnd_toStartOf="@+id/throwCompensate"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/throwCompensate" />
+
+    <TextView
+        android:id="@+id/throwQualityLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/throwQualityLabel"
+        app:layout_constraintBottom_toBottomOf="@+id/throwQuality"
+        app:layout_constraintEnd_toStartOf="@+id/throwQuality"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/throwQuality" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
