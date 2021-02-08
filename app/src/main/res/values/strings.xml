@@ -24,6 +24,16 @@
     <string name="charscreen_kk">KK</string>
 
     <string name="dice_thorw_button">Würfeln</string>
+    <string name="throwSkill">(skill)</string>
+    <string name="throwFormula">(skillformula)</string>
+    <string name="throwDiceLabel">Würfel:</string>
+    <string name="throwDiffLabel">Auszugleichen:</string>
+    <string name="throwQualityLabel">Qualität:</string>
+    <string name="throwResult0">0</string>
+    <string name="throwResult1">0</string>
+    <string name="throwResult2">0</string>
+    <string name="throwCompensate">0</string>
+    <string name="throwQuality">0</string>
 
     <string name="skill_base_value">0</string>
 
