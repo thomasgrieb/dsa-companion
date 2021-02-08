@@ -1,6 +1,7 @@
 package de.thomasinc.dsaapp.data;
 
 import java.util.HashMap;
+import java.util.Random;
 
 public class DiceModel implements DsaModel{
 
@@ -8,7 +9,6 @@ public class DiceModel implements DsaModel{
     private final Character character;
     private String currentCat;
     private String currentSkill;
-    private RollResult lastresult;
 
 
     public DiceModel(Character character, HashMap<String, HashMap<String,Skill>> skillMap){
@@ -16,15 +16,35 @@ public class DiceModel implements DsaModel{
         this.skillMap = skillMap;
     }
 
-    public void executeRoll(){
-
+    /**
+     * Rolls the dice for currently selected skill
+     * @return {@link RollResult} object
+     */
+    public RollResult roll(){
+        //TODO: fix possible Nullpointer
         Formula formula = skillMap.get(currentCat).get(currentSkill).getFormula();
 
-        int value1 = character.get(formula.getFirst());
-        int value2 = character.get(formula.getSecond());
-        int value3 = character.get(formula.getThird());
+        //TODO: if available, get char skill value and use as bonus
+        int bonus = 0;
 
-        lastresult = new Roll(value1, value2, value3).roll();
+        int first = character.get(formula.getFirst());
+        int second = character.get(formula.getSecond());
+        int third = character.get(formula.getThird());
+
+        Random ran = new Random();
+
+        int diff = 0;
+
+        int dice1 = ran.nextInt(20)+1;
+        diff += (first < dice1) ? first-dice1 : 0;
+
+        int dice2 = ran.nextInt(20)+1;
+        diff += (second < dice2) ? second-dice2: 0;
+
+        int dice3 = ran.nextInt(20)+1;
+        diff += (third < dice3) ? third-dice3 : 0;
+
+        return new RollResult(dice1,dice2,dice3,diff, bonus);
     }
 
     public Character getCharacter() {
@@ -49,10 +69,6 @@ public class DiceModel implements DsaModel{
 
     public void setCurrentSkill(String currentSkill) {
         this.currentSkill = currentSkill;
-    }
-
-    public RollResult getLastresult() {
-        return lastresult;
     }
 
     @Override
