@@ -10,11 +10,8 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import java.util.Random;
-
 import de.thomasinc.dsaapp.R;
 import de.thomasinc.dsaapp.ui.DsaView;
-import de.thomasinc.dsaapp.util.Util;
 
 
 /**
@@ -32,6 +29,7 @@ public class DiceActivity extends AppCompatActivity implements DsaView {
     private TextView resultView1;
     private TextView resultView2;
     private TextView compensateView;
+    private TextView qualityView;
 
 
 
@@ -43,11 +41,12 @@ public class DiceActivity extends AppCompatActivity implements DsaView {
         catsDropdown =  (Spinner) findViewById(R.id.throwCatDropdown);
         skillsDropdown =  (Spinner) findViewById(R.id.throwSkillDropdown);
         skillInfo = (TextView) findViewById(R.id.throwSkill);
-        skillFormula = (TextView) findViewById(R.id.throwFormular);
+        skillFormula = (TextView) findViewById(R.id.throwFormula);
         resultView0 = (TextView) findViewById(R.id.throwResult0);
         resultView1 = (TextView) findViewById(R.id.throwResult1);
         resultView2 = (TextView) findViewById(R.id.throwResult2);
         compensateView = (TextView) findViewById(R.id.throwCompensate);
+        qualityView = (TextView) findViewById(R.id.throwQuality);
 
 
         presenter = new DicePresenter(this, getApplicationContext());
@@ -85,7 +84,7 @@ public class DiceActivity extends AppCompatActivity implements DsaView {
 
                 presenter.requestRoll();
 
-
+                /*
                 resultView0.setTextColor(checkForCrit(dice1));
                 resultView1.setTextColor(checkForCrit(dice2));
                 resultView2.setTextColor(checkForCrit(dice3));
@@ -94,10 +93,9 @@ public class DiceActivity extends AppCompatActivity implements DsaView {
                 } else {
                     comp = "-"+String.valueOf(over);
                 }
+                */
             }
         });
-
-         */
     }
 
     private int checkForCrit(int dice){
@@ -140,18 +138,31 @@ public class DiceActivity extends AppCompatActivity implements DsaView {
     }
 
     /**
-     * Sets skill formula Label
+     * Sets skill formula label
      * @param formula formula for chosen skill
      */
     public void setSkillFormula(String formula){
         skillFormula.setText(formula);
     }
 
-    public void setResults(String first, String second, String third, String comp){
+    /**
+     * Sets result labels
+     * @param first result of first dice
+     * @param second result of second dice
+     * @param third result of third dice
+     */
+    public void setDice(int first, int second, int third){
         resultView0.setText(String.valueOf(first));
         resultView1.setText(String.valueOf(second));
         resultView2.setText(String.valueOf(third));
-        compensateView.setText(comp);
+    }
+
+    public void setQuality(int q){
+        qualityView.setText(String.valueOf(q));
+    }
+
+    public void setCompensate(int c){
+        compensateView.setText(String.valueOf(c));
     }
 
 
