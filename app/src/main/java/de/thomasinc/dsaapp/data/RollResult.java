@@ -22,8 +22,8 @@ public class RollResult {
     private final Crit secondCrit;
     private final Crit thirdCrit;
     private final int diff;
-    private final int quality;
-    private final int compensate;
+    private int quality;
+    private int compensate;
 
     public RollResult(int first, int second, int third, int diff, int bonus) {
         this.first = first;
@@ -32,11 +32,18 @@ public class RollResult {
         this.firstCrit = checkForCrit(first);
         this.secondCrit = checkForCrit(second);
         this.thirdCrit = checkForCrit(third);
-        this.diff = diff+bonus;
-        this.compensate = this.diff < 0 ? Math.abs(this.diff) : 0;
-        this.quality = this.diff < 0 ? 0 : ((bonus-this.compensate)+2)/3;
+        this.diff = diff;
+        calculateCompQual(bonus);
+        //this.compensate = this.diff < 0 ? Math.abs(this.diff) : 0;
+        //this.quality = this.diff < 0 ? 0 : ((bonus-this.compensate)+2)/3;
     }
 
+    /**
+     * internal function
+     * checks if result of dice roll is a crit (20 or 1)
+     * @param x dice result to be checked
+     * @return {@link Crit} enum if true, else null
+     */
     private Crit checkForCrit(int x){
         if(x==20){
             return Crit.Failure;
@@ -44,6 +51,22 @@ public class RollResult {
             return Crit.Success;
         }
         return null;
+    }
+
+    /**
+     * internal function
+     * calculates compensation and quality for every object of this class
+     * @param bonus a characters skill value
+     */
+    private void calculateCompQual(int bonus) {
+        int diff_abs = Math.abs(this.diff);
+        if (diff_abs > bonus) {
+            this.compensate = diff_abs - bonus;
+            this.quality = 0;
+        } else {
+            this.compensate = 0;
+            this.quality = (bonus - diff_abs == 0) ? 1 : (bonus - diff_abs + 2) / 3;
+        }
     }
 
     public int getFirst() {
