@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import de.thomasinc.dsaapp.ui.character.AttributeActivity;
+
 public class CharacterInputDialog extends AppCompatActivity {
 
     private final boolean values = true;
@@ -21,7 +23,7 @@ public class CharacterInputDialog extends AppCompatActivity {
             @Override
             public void onClick(View v){
                 startActivity(new Intent(CharacterInputDialog.this,
-                        CharacterBaseValueInput.class));
+                        AttributeActivity.class));
             }
         });
 
@@ -32,7 +34,6 @@ public class CharacterInputDialog extends AppCompatActivity {
             public void onClick(View v){
                 Intent intent = new Intent(CharacterInputDialog.this,
                         SkillsKat.class);
-                intent.putExtra("values",values);
                 startActivity(intent);
             }
         });

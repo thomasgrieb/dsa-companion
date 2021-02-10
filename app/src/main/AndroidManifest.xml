@@ -15,7 +15,7 @@
         <activity android:name=".ui.dice.DiceActivity" />
         <activity android:name=".Skills" />
         <activity android:name=".SkillsKat" />
-        <activity android:name=".CharacterBaseValueInput" />
+        <activity android:name=".ui.character.AttributeActivity" />
         <activity android:name=".chooseSkill" />
         <activity android:name=".ui.main.MainActivity">
             <intent-filter>
