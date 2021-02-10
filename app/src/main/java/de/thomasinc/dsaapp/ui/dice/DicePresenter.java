@@ -23,8 +23,7 @@ public class DicePresenter implements DsaPresenter {
 
     /**
      * Links the view
-     * Initializes model with character and skillmap (from context).
-     *
+     * Initializes model with character and skillmap (from context)
      * @param view    corresponding view
      * @param context corresponding model
      */
