@@ -3,6 +3,8 @@ package de.thomasinc.dsaapp.data;
 import java.util.HashMap;
 import java.util.Random;
 
+import de.thomasinc.dsaapp.data.character.Character;
+
 public class DiceModel implements DsaModel{
 
     private final HashMap<String, HashMap<String,Skill>> skillMap;

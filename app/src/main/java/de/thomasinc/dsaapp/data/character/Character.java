@@ -1,6 +1,8 @@
-package de.thomasinc.dsaapp.data;
+package de.thomasinc.dsaapp.data.character;
 
 import java.util.HashMap;
+
+import de.thomasinc.dsaapp.data.Skill;
 
 /**
  * Defines the Character object

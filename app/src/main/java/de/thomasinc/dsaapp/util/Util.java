@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
-import de.thomasinc.dsaapp.data.Character;
+import de.thomasinc.dsaapp.data.character.Character;
 import de.thomasinc.dsaapp.data.Formula;
 import de.thomasinc.dsaapp.data.Skill;
 

@@ -2,7 +2,7 @@ package de.thomasinc.dsaapp.util;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import de.thomasinc.dsaapp.data.Character;
+import de.thomasinc.dsaapp.data.character.Character;
 
 public class CharToJson {
 
