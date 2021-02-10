@@ -47,28 +47,4 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.13999999" />
 
-    <LinearLayout
-        android:id="@+id/profileBar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="bottom"
-        app:layout_constraintBottom_toBottomOf="parent">
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="1"/>
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/charProfileBarDescription"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="12dp"
-        android:text="@string/profile_bar_description"
-        app:layout_constraintBottom_toTopOf="@+id/profileBar"
-        app:layout_constraintEnd_toEndOf="@+id/profileBar"
-        app:layout_constraintStart_toStartOf="@+id/profileBar" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

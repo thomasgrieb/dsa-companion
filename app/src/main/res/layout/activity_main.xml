@@ -23,7 +23,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="@string/titlescreen_button1"
+        android:text="@string/titlescreen_dice_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
@@ -34,7 +34,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="@string/titlescreen_button2"
+        android:text="@string/titlescreen_skill_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonThrow" />
@@ -57,10 +57,79 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="48dp"
-        android:text="@string/titlescreen_button0"
+        android:text="@string/titlescreen_char_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <LinearLayout
+        android:id="@+id/profileBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="bottom"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <Button
+            android:id="@+id/profile1Button"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="1dp"
+            android:layout_weight="1"
+            android:text="@string/profile1_button"
+            tools:ignore="ButtonStyle" />
+
+        <Button
+            android:id="@+id/profile2Button"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="@string/profile2_button"
+            android:layout_marginEnd="1dp"
+            android:layout_marginStart="1dp"
+            tools:ignore="ButtonStyle" />
+
+        <Button
+            android:id="@+id/profile3Button"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="@string/profile3_button"
+            android:layout_marginEnd="1dp"
+            android:layout_marginStart="1dp"
+            tools:ignore="ButtonStyle" />
+
+        <Button
+            android:id="@+id/profile4Button"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="@string/profile4_button"
+            android:layout_marginEnd="1dp"
+            android:layout_marginStart="1dp"
+            tools:ignore="ButtonStyle" />
+
+        <Button
+            android:id="@+id/profile5Button"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="@string/profile5_button"
+            android:layout_marginStart="1dp"
+            tools:ignore="ButtonStyle" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/charProfileBarDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:text="@string/profile_bar_description"
+        app:layout_constraintBottom_toTopOf="@+id/profileBar"
+        app:layout_constraintEnd_toEndOf="@+id/profileBar"
+        app:layout_constraintStart_toStartOf="@+id/profileBar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
