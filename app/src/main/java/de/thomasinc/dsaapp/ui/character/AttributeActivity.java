@@ -1,4 +1,4 @@
-package de.thomasinc.dsaapp;
+package de.thomasinc.dsaapp.ui.character;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -17,7 +17,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
 
-import de.thomasinc.dsaapp.data.Character;
+import de.thomasinc.dsaapp.R;
+import de.thomasinc.dsaapp.data.character.Character;
 import de.thomasinc.dsaapp.ui.main.MainActivity;
 import de.thomasinc.dsaapp.util.CharToJson;
 import de.thomasinc.dsaapp.util.MinMaxValueFilter;
@@ -36,7 +37,22 @@ import de.thomasinc.dsaapp.util.Json;
  * Ends with returning the user to the {@link MainActivity}.
  */
 
-public class CharacterBaseValueInput extends AppCompatActivity {
+public class AttributeActivity extends AppCompatActivity {
+
+    private AttributePresenter presenter;
+
+    private EditText editMU;
+    private EditText editKL;
+    private EditText editIN;
+    private EditText editCH;
+    private EditText editFF;
+    private EditText editGE;
+    private EditText editKO;
+    private EditText editKK;
+    private final EditText[] textArray = {editMU,editKL,editIN,editCH,editFF,editGE,editKO,editKK};
+
+    private Button confirmBtn;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,31 +62,24 @@ public class CharacterBaseValueInput extends AppCompatActivity {
         final String char_file = "myCharacter.json";
         final Context context = getApplicationContext();
 
-        final EditText editMU = findViewById(R.id.inputMu);
-        final EditText editKL = findViewById(R.id.inputKl);
-        final EditText editIN = findViewById(R.id.inputIn);
-        final EditText editCH = findViewById(R.id.inputCh);
-        final EditText editFF = findViewById(R.id.inputFF);
-        final EditText editGE = findViewById(R.id.inputGe);
-        final EditText editKO = findViewById(R.id.inputKo);
-        final EditText editKK = findViewById(R.id.inputKK);
+        presenter = new AttributePresenter(this, context);
 
-        final EditText[] textArray = {editMU,editKL,editIN,editCH,editFF,editGE,editKO,editKK};
+        editMU = findViewById(R.id.inputMu);
+        editKL = findViewById(R.id.inputKl);
+        editIN = findViewById(R.id.inputIn);
+        editCH = findViewById(R.id.inputCh);
+        editFF = findViewById(R.id.inputFF);
+        editGE = findViewById(R.id.inputGe);
+        editKO = findViewById(R.id.inputKo);
+        editKK = findViewById(R.id.inputKK);
 
-        final Button confirmBtn = (Button) findViewById(R.id.buttonCharConf);
+        confirmBtn = (Button) findViewById(R.id.buttonCharConf);
 
-        if(Util.checkIfCharExists(context)){
-            Character c = Json.readCharFromJson(context);
-            int[] cAr = c.charBaseValuesToArray();
-
-            for(int i=0; i<8;i++) {
-                System.out.println(cAr[i]);
-                textArray[i].setText(String.valueOf(cAr[i]));
-            }
-        }
 
         //If values are already set, confirmation button is enabled from the start due to this code
         // snippet
+
+        //presenter.
         if(!Util.checkIfAnyEmptyArray(textArray)){
             confirmBtn.setEnabled(true);
         }
@@ -123,8 +132,14 @@ public class CharacterBaseValueInput extends AppCompatActivity {
                 } catch (IOException er){
                     er.printStackTrace();
                 }
-                startActivity(new Intent( CharacterBaseValueInput.this, MainActivity.class));
+                startActivity(new Intent( AttributeActivity.this, MainActivity.class));
             }
         });
     }
+
+    public void setConfirmBtnStatus(boolean status) {
+        this.confirmBtn.setEnabled(status);
+    }
+
+
 }
