@@ -15,9 +15,6 @@ import de.thomasinc.dsaapp.ui.dice.DiceActivity;
 
 public class MainActivity extends AppCompatActivity implements DsaView {
 
-    private final boolean values = false;
-    private MainPresenter presenter = new MainPresenter(this);
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
