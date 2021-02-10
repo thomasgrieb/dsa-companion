@@ -2,11 +2,19 @@
     #Titlescreen
     <string name="app_name">DSA Calculator</string>
     <string name="titlescreen_title">DSA Automatisches Würfeln</string>
-    <string name="titlescreen_button0">Charaktererstellung</string>
-    <string name="titlescreen_button1">Würfeln</string>
-    <string name="titlescreen_button2">Fähigkeiten</string>
+    <string name="titlescreen_char_button">Charaktererstellung</string>
+    <string name="titlescreen_dice_button">Würfeln</string>
+    <string name="titlescreen_skill_button">Fähigkeiten</string>
     <string name="titlescreen_button_exit">Exit</string>
     <string name="title_activity_choose_skill">Fähigkeit auswählen</string>
+
+    <string name="profile1_button">1</string>
+    <string name="profile2_button">2</string>
+    <string name="profile3_button">3</string>
+    <string name="profile4_button">4</string>
+    <string name="profile5_button">5</string>
+    <string name="profile_bar_description">Profile</string>
+
 
     <string name="button_confirm">Bestätigen</string>
     <string name="action_settings">Settings</string>
@@ -41,7 +49,6 @@
     <string name="char_button_base_values">Eigenschaftswerte</string>
     <string name="char_button_skill_values">Fähigkeitenwerte</string>
     <string name="char_button_profile_creation">Profilerstellung</string>
-    <string name="profile_bar_description">Profile</string>
 
     <string name="prof_creat_text_title">Profilerstellung</string>
     <string name="prof_creat_edittext_name">Bitte Charactername eingeben</string>
