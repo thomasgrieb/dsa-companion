@@ -6,20 +6,24 @@ import android.os.Bundle;
 import android.view.View;
 import android.content.Intent;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.Spinner;
 
 import de.thomasinc.dsaapp.CharacterInputDialog;
 import de.thomasinc.dsaapp.R;
-import de.thomasinc.dsaapp.SkillsKat;
 import de.thomasinc.dsaapp.ui.DsaView;
 import de.thomasinc.dsaapp.ui.dice.DiceActivity;
 
 public class MainActivity extends AppCompatActivity implements DsaView {
 
+    private MainPresenter presenter;
+    private Spinner profileDropdown;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        presenter = new MainPresenter(this, getApplicationContext());
 
         Button throwButton = (Button) findViewById(R.id.buttonThrow);
 
@@ -47,6 +51,7 @@ public class MainActivity extends AppCompatActivity implements DsaView {
                 startActivity(new Intent(MainActivity.this, CharacterInputDialog.class));
             }
         });
+
     }
 
     @Override
