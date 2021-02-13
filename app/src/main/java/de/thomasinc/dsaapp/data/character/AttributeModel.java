@@ -10,6 +10,6 @@ public class AttributeModel implements DsaModel {
 
     @Override
     public DsaModel getModel() {
-        return null;
+        return this;
     }
 }
