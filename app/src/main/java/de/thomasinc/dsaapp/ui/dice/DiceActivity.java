@@ -17,6 +17,7 @@ import de.thomasinc.dsaapp.ui.DsaView;
 /**
  * Implements the view for rolling the dice on a specific skill. Users must first select a category
  * from the first dropdown menu, then a skill from that category from the second dropdown.
+ * TODO: Mark crits, show skill value,
  */
 public class DiceActivity extends AppCompatActivity implements DsaView {
 

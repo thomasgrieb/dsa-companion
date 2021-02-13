@@ -73,53 +73,11 @@
         android:layout_marginEnd="5dp"
         app:layout_constraintBottom_toBottomOf="parent">
 
-        <Button
-            android:id="@+id/profile1Button"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginEnd="1dp"
-            android:layout_weight="1"
-            android:text="@string/profile1_button"
-            tools:ignore="ButtonStyle" />
-
-        <Button
-            android:id="@+id/profile2Button"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="@string/profile2_button"
-            android:layout_marginEnd="1dp"
-            android:layout_marginStart="1dp"
-            tools:ignore="ButtonStyle" />
-
-        <Button
-            android:id="@+id/profile3Button"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="@string/profile3_button"
-            android:layout_marginEnd="1dp"
-            android:layout_marginStart="1dp"
-            tools:ignore="ButtonStyle" />
-
-        <Button
-            android:id="@+id/profile4Button"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="@string/profile4_button"
-            android:layout_marginEnd="1dp"
-            android:layout_marginStart="1dp"
-            tools:ignore="ButtonStyle" />
-
-        <Button
-            android:id="@+id/profile5Button"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="@string/profile5_button"
-            android:layout_marginStart="1dp"
-            tools:ignore="ButtonStyle" />
+        <Spinner
+            android:id="@+id/profileSelectDropdown"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:layout_editor_absoluteY="622dp" />
     </LinearLayout>
 
     <TextView
