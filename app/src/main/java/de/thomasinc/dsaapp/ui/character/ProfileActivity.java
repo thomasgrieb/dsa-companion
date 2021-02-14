@@ -1,4 +1,4 @@
-package de.thomasinc.dsaapp;
+package de.thomasinc.dsaapp.ui.character;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -8,7 +8,9 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import de.thomasinc.dsaapp.R;
 import de.thomasinc.dsaapp.data.character.Character;
+import de.thomasinc.dsaapp.ui.DsaView;
 import de.thomasinc.dsaapp.util.Util;
 
 /**
@@ -19,16 +21,23 @@ import de.thomasinc.dsaapp.util.Util;
  * User enters a characters name; by clicking on the confirmation button, the program checks the existing
  * files for duplicates and number of files (currently one 5 profiles supported)
  */
-public class ProfileCreation extends AppCompatActivity {
+public class ProfileActivity extends AppCompatActivity implements DsaView {
+
+    private ProfilePresenter presenter;
+
+    private Button confBtn;
+    private EditText nameInput;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_creation);
 
-        final Button confBtn = (Button) findViewById(R.id.buttonProfConf);
-        final EditText nameInput = findViewById(R.id.profcreatEditTextName);
+        presenter = new ProfilePresenter(this, getApplicationContext());
 
-        final String fileEnding = ".json";
+        confBtn = (Button) findViewById(R.id.buttonProfConf);
+        confBtn.setEnabled(false);
+        nameInput = findViewById(R.id.profcreatEditTextName);
 
         nameInput.addTextChangedListener(new TextWatcher() {
             @Override
@@ -43,9 +52,7 @@ public class ProfileCreation extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (!Util.checkIfEmpty(nameInput)){
-                    confBtn.setEnabled(true);
-                }
+                presenter.checkName(nameInput.getText().toString());
             }
         });
 
@@ -63,7 +70,14 @@ public class ProfileCreation extends AppCompatActivity {
             }
         });
 
+    }
 
+    public void setConfBtnStatus(boolean status) {
+        confBtn.setEnabled(status);
+    }
+
+    @Override
+    public void onError(String errormsg) {
 
     }
 }
