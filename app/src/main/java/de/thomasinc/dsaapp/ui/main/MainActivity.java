@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.content.Intent;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
@@ -18,6 +20,7 @@ public class MainActivity extends AppCompatActivity implements DsaView {
 
     private MainPresenter presenter;
     private Spinner profileDropdown;
+    private Button throwButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +28,10 @@ public class MainActivity extends AppCompatActivity implements DsaView {
         setContentView(R.layout.activity_main);
         presenter = new MainPresenter(this, getApplicationContext());
 
-        Button throwButton = (Button) findViewById(R.id.buttonThrow);
+        profileDropdown = findViewById(R.id.profileSelectDropdown);
+        presenter.fillProfileDropdown();
+
+        throwButton = (Button) findViewById(R.id.buttonThrow);
 
         throwButton.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -52,6 +58,28 @@ public class MainActivity extends AppCompatActivity implements DsaView {
             }
         });
 
+        profileDropdown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                presenter.setCurrentProfilePref(parent.getItemAtPosition(position).toString());
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                presenter.noProfileSelected();
+            }
+        });
+
+    }
+
+    public void fillProfileDropdown(String[] profiles){
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_spinner_dropdown_item, profiles);
+        profileDropdown.setAdapter(adapter);
+    }
+
+    public void setThrowButtonStatus(boolean status){
+        throwButton.setEnabled(status);
     }
 
     @Override
