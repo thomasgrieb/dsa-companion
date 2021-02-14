@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 
 import de.thomasinc.dsaapp.ui.character.AttributeActivity;
+import de.thomasinc.dsaapp.ui.character.ProfileActivity;
 
 public class CharacterInputDialog extends AppCompatActivity {
 
@@ -44,7 +45,7 @@ public class CharacterInputDialog extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(CharacterInputDialog.this,
-                        ProfileCreation.class);
+                        ProfileActivity.class);
                 startActivity(intent);
             }
         });
