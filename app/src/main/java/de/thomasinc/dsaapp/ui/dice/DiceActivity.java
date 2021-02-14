@@ -158,10 +158,18 @@ public class DiceActivity extends AppCompatActivity implements DsaView {
         resultView2.setText(String.valueOf(third));
     }
 
+    /**
+     * Sets throw quality label
+     * @param q quality
+     */
     public void setQuality(int q){
         qualityView.setText(String.valueOf(q));
     }
 
+    /**
+     * Sets throw compansation label
+     * @param c compensation
+     */
     public void setCompensate(int c){
         compensateView.setText(String.valueOf(c));
     }
