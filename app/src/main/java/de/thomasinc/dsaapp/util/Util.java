@@ -162,4 +162,23 @@ public class Util {
         return context.getFileStreamPath("myCharacter.json").exists();
     }
 
+    /**
+     * Normalizes text by: \
+     * trimming excess whitespace and replacing spaces with underscores \
+     * setting to lowercase \
+     * replacing umlauts \
+     * removing punctuation
+     * @param text any {@link String}
+     * @return a normalized version that can be used as filename etc.
+     */
+    public static String normalizeString(String text){
+        String textNoWhitespace = text.trim().replace(" ","_");
+        String textLower = textNoWhitespace.toLowerCase();
+        String textAscii = textLower
+                .replaceAll("ä","ae")
+                .replaceAll("ö","oe")
+                .replaceAll("ü","ue");
+        return textAscii.replace("[+-_.,;]","");
+    }
+
 }
