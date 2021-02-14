@@ -135,12 +135,8 @@ public class Util {
      * @param text a single {@link EditText} object
      * @return boolean, false if not empty, true if empty
      */
-    public static boolean checkIfEmpty(EditText text) {
-        if (text.getText().toString().trim().length() == 0) {
-            return true;
-        } else {
-            return false;
-        }
+    public static boolean checkIfEmpty(String text) {
+        return text.trim().length() == 0;
     }
 
     /**
@@ -148,7 +144,7 @@ public class Util {
      * @param array array of {@link EditText} objects
      * @return boolean, false if none empty, true if any empty
      */
-    public static boolean checkIfAnyEmptyArray(EditText[] array) {
+    public static boolean checkIfAnyEmptyArray(String[] array) {
         for (int i = 0; i < 8; i++) {
             if (Util.checkIfEmpty(array[i])) {
                 return true;
