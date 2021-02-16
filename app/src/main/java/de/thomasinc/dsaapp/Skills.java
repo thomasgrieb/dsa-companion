@@ -37,7 +37,6 @@ public class Skills extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                System.out.println("klick");
                 String value = adapter.getItem(position);
                 Intent intent = new Intent(Skills.this, DiceActivity.class);
                 intent.putExtra("Skill", value);

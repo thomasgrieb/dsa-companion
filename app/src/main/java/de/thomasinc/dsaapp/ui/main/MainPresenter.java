@@ -26,9 +26,7 @@ public class MainPresenter implements DsaPresenter {
      * @param prof selected profile
      */
     public void setCurrentProfilePref(String prof){
-        System.out.println(prof);
         SharedPreferences.Editor editor = this.pref.edit();
-        editor.putString("current", prof);
         model.setCurrentProfile(prof);
         editor.apply();
         view.setThrowButtonStatus(true);

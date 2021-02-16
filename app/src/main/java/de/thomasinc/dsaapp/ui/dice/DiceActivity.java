@@ -101,7 +101,6 @@ public class DiceActivity extends AppCompatActivity implements DsaView {
 
     private int checkForCrit(int dice){
         if (dice == 1) {
-            System.out.println(dice+" crit");
             return getResources().getColor(R.color.colorCritSuccess);
         } else if (dice == 20) {
             return getResources().getColor(R.color.colorCritFailure);

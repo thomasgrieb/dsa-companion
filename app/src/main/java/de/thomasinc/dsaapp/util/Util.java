@@ -28,7 +28,6 @@ public class Util {
             while(it.hasNext()) {
                 String cat = it.next();
                 JSONObject subobj = obj.getJSONObject(cat);
-                System.out.println("Kat: "+cat);
                 skills.put(cat, new HashMap<>());
                 Iterator<String> itSk = subobj.keys();
                 String entry;
@@ -36,7 +35,6 @@ public class Util {
                 String[] fAr;
                 while (itSk.hasNext()) {
                     entry = itSk.next();
-                    System.out.println("entry: "+entry);
                     fAr = subobj.getString(entry).split("-");
                     f = new Formula(fAr[0], fAr[1], fAr[2]);
                     skills.get(cat).put(entry, new Skill(entry, f));
