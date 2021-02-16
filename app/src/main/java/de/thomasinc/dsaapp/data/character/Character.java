@@ -179,6 +179,10 @@ public class Character {
         private HashMap<Skill, Integer> skillMap = new HashMap<>();
         private final String name;
 
+        /**
+         * Sets defaults for character attributes to 8
+         * @param name characters name
+         */
         public CharBuilder(String name) {
             this.name = name;
             this.mu = 8;
