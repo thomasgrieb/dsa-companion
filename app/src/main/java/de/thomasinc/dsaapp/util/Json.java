@@ -5,8 +5,12 @@ import android.content.Context;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.Writer;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -80,10 +84,35 @@ public class Json {
 
     /**
      * Writes a Character object to a json file, derives the filename from the charactername
-     * @param context
-     * @param c
+     * @param context application context
+     * @param c needs to include at least the characters name
      */
     public static void writeCharToJson(Context context, Character c) {
-        //final String filename =
+        JSONObject jobj = new JSONObject();
+        try {
+            jobj.put("Name",c.getName());
+            if (c.getMu()!=0) {
+                jobj.put("MU", c.getMu());
+                jobj.put("KL", c.getKl());
+                jobj.put("IN", c.getIn());
+                jobj.put("CH", c.getCh());
+                jobj.put("FF", c.getFf());
+                jobj.put("GE", c.getGe());
+                jobj.put("KO", c.getKo());
+                jobj.put("KK", c.getKk());
+            }
+        }
+        catch (JSONException er){
+            er.printStackTrace();
+        }
+        try {
+            Writer output = null;
+            File file = new File(context.getFilesDir(), Util.normalizeString(c.getName()));
+            output = new BufferedWriter(new FileWriter(file));
+            output.write(jobj.toString());
+            output.close();
+        } catch (IOException er){
+            er.printStackTrace();
+        }
     }
 }

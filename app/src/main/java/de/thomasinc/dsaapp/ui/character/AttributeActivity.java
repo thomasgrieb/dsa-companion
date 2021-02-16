@@ -20,10 +20,9 @@ import java.io.Writer;
 import de.thomasinc.dsaapp.R;
 import de.thomasinc.dsaapp.data.character.Character;
 import de.thomasinc.dsaapp.ui.main.MainActivity;
-import de.thomasinc.dsaapp.util.CharToJson;
+import de.thomasinc.dsaapp.util.Json;
 import de.thomasinc.dsaapp.util.MinMaxValueFilter;
 import de.thomasinc.dsaapp.util.Util;
-import de.thomasinc.dsaapp.util.Json;
 
 /**
  * Implements functionality for the character value input window.
@@ -122,16 +121,7 @@ public class AttributeActivity extends AppCompatActivity {
                         .kk(Integer.parseInt(editKK.getText().toString()))
                         .build();
 
-                JSONObject charJobj = new CharToJson(c_new).getJobj();
-                try {
-                    Writer output = null;
-                    File file = new File(getApplicationContext().getFilesDir(), char_file); //const-class?
-                    output = new BufferedWriter(new FileWriter(file));
-                    output.write(charJobj.toString());
-                    output.close();
-                } catch (IOException er){
-                    er.printStackTrace();
-                }
+                Json.writeCharToJson(context,c);
                 startActivity(new Intent( AttributeActivity.this, MainActivity.class));
             }
         });
