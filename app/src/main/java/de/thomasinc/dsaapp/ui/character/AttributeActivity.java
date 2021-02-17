@@ -79,9 +79,11 @@ public class AttributeActivity extends AppCompatActivity {
         // snippet
 
         //presenter.
+        /*
         if(!Util.checkIfAnyEmptyArray(textArray)){
             confirmBtn.setEnabled(true);
         }
+        */
 
         for(int i=0; i<8;i++) {
             //Adjust minimum und maximum input values for character here (inclusive)
@@ -96,11 +98,13 @@ public class AttributeActivity extends AppCompatActivity {
 
                 @Override
                 public void afterTextChanged(Editable s) {
+                    /*
                     if (!Util.checkIfAnyEmptyArray(textArray)) {
                         confirmBtn.setEnabled(true);
                     } else{
                         confirmBtn.setEnabled(false);
                     }
+                     */
                 }
             });
         }
@@ -109,8 +113,10 @@ public class AttributeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v){
 
+                //TODO: get char for current profile and write only new values to file
+
                 //eigl model
-                Character c_new = new Character.CharBuilder("placeholder")
+                Character c = new Character.CharBuilder("placeholder")
                         .mu(Integer.parseInt(editMU.getText().toString()))
                         .kl(Integer.parseInt(editKL.getText().toString()))
                         .in(Integer.parseInt(editIN.getText().toString()))
