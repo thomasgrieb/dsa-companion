@@ -26,12 +26,13 @@ public class MainActivity extends AppCompatActivity implements DsaView {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        presenter = new MainPresenter(this, getApplicationContext());
-
-        profileDropdown = findViewById(R.id.profileSelectDropdown);
-        presenter.fillProfileDropdown();
 
         throwButton = (Button) findViewById(R.id.buttonThrow);
+
+        profileDropdown = findViewById(R.id.profileSelectDropdown);
+
+        presenter = new MainPresenter(this, getApplicationContext());
+        presenter.fillProfileDropdown();
 
         throwButton.setOnClickListener(new View.OnClickListener(){
             @Override
