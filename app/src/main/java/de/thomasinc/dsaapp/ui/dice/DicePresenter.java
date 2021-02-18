@@ -111,7 +111,7 @@ public class DicePresenter implements DsaPresenter {
      * @return a set of profiles or default set
      */
     public String fetchProfilePref() {
-        return pref.getString(ConstantsGlobal.PREFERENCES_CURRENT_PROF, "");
+        return pref.getString(ConstantsGlobal.PREFERENCES_CURRENT_PROF_KEY, "");
     }
 
     @Override
