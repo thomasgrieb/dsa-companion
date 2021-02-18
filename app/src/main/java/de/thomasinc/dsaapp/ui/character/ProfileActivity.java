@@ -1,4 +1,6 @@
 package de.thomasinc.dsaapp.ui.character;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -6,18 +8,20 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import de.thomasinc.dsaapp.CharacterInputDialog;
 import de.thomasinc.dsaapp.R;
-import de.thomasinc.dsaapp.data.character.Character;
 import de.thomasinc.dsaapp.ui.DsaView;
-import de.thomasinc.dsaapp.util.Util;
+
 
 /**
  * Implements functionality for the profile creation window.
  * TODO: add support for Optolith json file - Users should be able to create a new Profile from
- *  a given Optolith-created json file
+ * a given Optolith-created json file
  * TODO: prohibit disruptive signs in profile name in order to create valid filename
+ * TODO: add confirmation dialog or message and warning if char already exists
  * User enters a characters name; by clicking on the confirmation button, the program checks the existing
  * files for duplicates and number of files (currently one 5 profiles supported)
  */
@@ -37,6 +41,7 @@ public class ProfileActivity extends AppCompatActivity implements DsaView {
 
         confBtn = (Button) findViewById(R.id.buttonProfConf);
         confBtn.setEnabled(false);
+
         nameInput = findViewById(R.id.profcreatEditTextName);
 
         nameInput.addTextChangedListener(new TextWatcher() {
@@ -59,14 +64,9 @@ public class ProfileActivity extends AppCompatActivity implements DsaView {
         confBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final String charname = nameInput.getText().toString();
-                final String filename = charname+fileEnding;
-
-                Character c = new Character.CharBuilder(charname).build();
-
-
-
-
+                presenter.createProfile();
+                startActivity(new Intent(ProfileActivity.this,
+                        CharacterInputDialog.class));
             }
         });
 
@@ -78,6 +78,13 @@ public class ProfileActivity extends AppCompatActivity implements DsaView {
 
     @Override
     public void onError(String errormsg) {
-
+        //from
+        // https://stackoverflow.com/questions/2115758/how-do-i-display-an-alert-dialog-on-android
+        new AlertDialog.Builder(this)
+                .setTitle("Fehler")
+                .setMessage(errormsg)
+                .setNeutralButton(android.R.string.ok, null)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
     }
 }
