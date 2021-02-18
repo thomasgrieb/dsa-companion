@@ -27,6 +27,8 @@ public class Json {
 
     private static final String FILE_ENDING_JSON = ".json";
     private static final String PROFILE_MAP = "profilemap" + FILE_ENDING_JSON;
+    private static final String CHARACTER_NAME_KEY = "Name";
+    private static final String CHARACTER_ATTRIBUTE_KEY = "Attributes";
 
 
     /**
@@ -63,10 +65,13 @@ public class Json {
         if (!profileFile.exists()) {
             try {
                 profileFile.createNewFile();
-                Log.i("Json","Created profilemap file.");
+                Log.i("json", "Created profilemap file.");
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        } else {
+            Log.i("json", "Profilemap file found.");
+
         }
     }
 
@@ -76,7 +81,7 @@ public class Json {
      * @param context application context
      * @return profile map
      */
-    public static JSONObject readProfileMapFile(Context context){
+    public static JSONObject readProfileMapFile(Context context) {
         JSONObject jobjMap = new JSONObject();
         try {
             BufferedReader reader = new BufferedReader(new InputStreamReader(
@@ -99,15 +104,15 @@ public class Json {
      * Retrieves a specific characters filepath using readProfileMapFile
      *
      * @param context application context
-     * @param name characters name
+     * @param name    characters name
      * @return the corresponding filename
      */
-    public static String getCharFilepath(Context context, String name){
+    public static String getCharFilename(Context context, String name) {
         String filename = "";
         try {
             JSONObject jobj = readProfileMapFile(context);
             filename = jobj.getString(name);
-        } catch (JSONException e){
+        } catch (JSONException e) {
             e.printStackTrace();
         }
         return filename;
@@ -121,18 +126,15 @@ public class Json {
      * @return {@link Character} object with the saved attributes
      */
     public static Character readCharFromJson(Context context, String name) {
-        ArrayList<Integer> l = new ArrayList<>();
+        String filename = getCharFilename(context, name);
+        ArrayList<Integer> attrList = new ArrayList<>();
         String json = null;
         try {
-            //BufferedReader reader = new BufferedReader(new InputStreamReader(
-            //        context.openFileInput(), StandardCharsets.UTF_8));
-
-            InputStream file = context.openFileInput("myCharacter.json"); //const-class?
-            int size = file.available();
-            byte[] buffer = new byte[size];
-            file.read(buffer);
-            file.close();
-            json = new String(buffer, StandardCharsets.UTF_8);
+            System.out.println(filename);
+            BufferedReader reader = new BufferedReader(new InputStreamReader(
+                    context.openFileInput(filename), StandardCharsets.UTF_8));
+            json = reader.readLine();
+            reader.close();
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -140,23 +142,29 @@ public class Json {
         try {
             assert json != null;
             JSONObject obj = new JSONObject(json);
-            Iterator<String> it = obj.keys();
+            if (obj.get(CHARACTER_NAME_KEY) != name) {
+                Log.e("json", "Name given to function does not match name in file!");
+            }
+            JSONObject attrObj = obj.getJSONObject(CHARACTER_ATTRIBUTE_KEY);
+            Iterator<String> it = attrObj.keys();
             while (it.hasNext()) {
-                l.add(obj.getInt(it.next()));
+                attrList.add(attrObj.getInt(it.next()));
             }
         } catch (JSONException ex) {
             ex.printStackTrace();
         }
+        Log.i("json", "Read character " + name + " from file " + filename +
+                ". Creating Character object ...");
 
-        return new Character.CharBuilder("placeholder")
-                .mu(l.get(0))
-                .kl(l.get(1))
-                .in(l.get(2))
-                .ch(l.get(3))
-                .ff(l.get(4))
-                .ge(l.get(5))
-                .ko(l.get(6))
-                .kk(l.get(7))
+        return new Character.CharBuilder(name)
+                .mu(attrList.get(0))
+                .kl(attrList.get(1))
+                .in(attrList.get(2))
+                .ch(attrList.get(3))
+                .ff(attrList.get(4))
+                .ge(attrList.get(5))
+                .ko(attrList.get(6))
+                .kk(attrList.get(7))
                 .build();
     }
 
@@ -174,16 +182,18 @@ public class Json {
         //TODO create seperate attribute-dictionary in character json file
         JSONObject jobjChar = new JSONObject();
         try {
-            jobjChar.put("Name", name);
+            jobjChar.put(CHARACTER_NAME_KEY, name);
             if (c.getMu() != 0) {
-                jobjChar.put("MU", c.getMu());
-                jobjChar.put("KL", c.getKl());
-                jobjChar.put("IN", c.getIn());
-                jobjChar.put("CH", c.getCh());
-                jobjChar.put("FF", c.getFf());
-                jobjChar.put("GE", c.getGe());
-                jobjChar.put("KO", c.getKo());
-                jobjChar.put("KK", c.getKk());
+                JSONObject attrObj = new JSONObject();
+                attrObj.put("MU", c.getMu());
+                attrObj.put("KL", c.getKl());
+                attrObj.put("IN", c.getIn());
+                attrObj.put("CH", c.getCh());
+                attrObj.put("FF", c.getFf());
+                attrObj.put("GE", c.getGe());
+                attrObj.put("KO", c.getKo());
+                attrObj.put("KK", c.getKk());
+                jobjChar.put(CHARACTER_ATTRIBUTE_KEY, attrObj);
             }
         } catch (JSONException er) {
             er.printStackTrace();
@@ -192,7 +202,7 @@ public class Json {
         File charFile = new File(context.getFilesDir(), filename);
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(charFile));
-            System.out.println(charFile);
+            Log.i("json", "Wrote Character " + name + " to file " + filename + ".");
             writer.write(jobjChar.toString());
             writer.close();
         } catch (IOException er) {
@@ -211,7 +221,7 @@ public class Json {
             BufferedWriter writer = new BufferedWriter(new FileWriter(profileFile));
             writer.write(jobjMap.toString());
             writer.close();
-            System.out.println("Profilemap: " + jobjMap.toString());
+            Log.i("json", "Wrote character " + name + " to profile map file.");
         } catch (IOException e) {
             e.printStackTrace();
         }
