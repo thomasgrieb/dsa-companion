@@ -10,6 +10,9 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
 import de.thomasinc.dsaapp.R;
 import de.thomasinc.dsaapp.ui.DsaView;
 
@@ -38,6 +41,8 @@ public class DiceActivity extends AppCompatActivity implements DsaView {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dice);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         catsDropdown =  (Spinner) findViewById(R.id.throwCatDropdown);
         skillsDropdown =  (Spinner) findViewById(R.id.throwSkillDropdown);

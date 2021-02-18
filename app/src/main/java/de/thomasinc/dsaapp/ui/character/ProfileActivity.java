@@ -37,6 +37,8 @@ public class ProfileActivity extends AppCompatActivity implements DsaView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_creation);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         presenter = new ProfilePresenter(this, getApplicationContext());
 
         confBtn = (Button) findViewById(R.id.buttonProfConf);

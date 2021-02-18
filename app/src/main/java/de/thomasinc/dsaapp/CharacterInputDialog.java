@@ -18,6 +18,8 @@ public class CharacterInputDialog extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_character_input_dialog);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         Button baseValueButton = (Button) findViewById(R.id.charBaseValueButton);
 
         baseValueButton.setOnClickListener(new View.OnClickListener(){
