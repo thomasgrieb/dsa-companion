@@ -1,12 +1,14 @@
 package de.thomasinc.dsaapp.ui.dice;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 
 import java.util.Set;
 
 import de.thomasinc.dsaapp.data.DiceModel;
 import de.thomasinc.dsaapp.data.RollResult;
 import de.thomasinc.dsaapp.ui.DsaPresenter;
+import de.thomasinc.dsaapp.util.ConstantsGlobal;
 import de.thomasinc.dsaapp.util.Json;
 import de.thomasinc.dsaapp.util.Util;
 
@@ -20,10 +22,12 @@ public class DicePresenter implements DsaPresenter {
 
     private DiceActivity view;
     private final DiceModel model;
+    private SharedPreferences pref;
 
     /**
      * Links the view
      * Initializes model with character and skillmap (from context)
+     *
      * @param view    corresponding view
      * @param context corresponding model
      */
@@ -32,9 +36,9 @@ public class DicePresenter implements DsaPresenter {
     //  https://stackoverflow.com/questions/34303510/does-the-presenter-having-knowledge-of-the-activity-context-a-bad-idea-in-the
     //  https://www.journaldev.com/20644/android-mvp-dagger2
     public DicePresenter(DiceActivity view, Context context) {
+        this.pref = context.getSharedPreferences(ConstantsGlobal.PREFERENCES_FILE, 0);
         this.view = view;
-        //TODO: errorhandling
-        this.model = new DiceModel(Json.readCharFromJson(context), Util.makeSkillMap(context));
+        this.model = new DiceModel(Json.readCharFromJson(context, fetchProfilePref()), Util.makeSkillMap(context));
     }
 
     /**
@@ -62,7 +66,7 @@ public class DicePresenter implements DsaPresenter {
             String[] skillsAr = new String[skills.size()];
             skillsAr = skills.toArray(skillsAr);
             view.fillSkillDropdown(skillsAr);
-        }catch (NullPointerException e) {
+        } catch (NullPointerException e) {
             view.onError(e.toString());
         }
 
@@ -73,7 +77,7 @@ public class DicePresenter implements DsaPresenter {
             view.onError("Keine Fähigkeit ausgewählt!");
         } else {
             RollResult res = model.roll();
-            view.setDice(res.getFirst(),res.getSecond(),res.getThird());
+            view.setDice(res.getFirst(), res.getSecond(), res.getThird());
             view.setCompensate(res.getCompensate());
             view.setQuality(res.getQuality());
         }
@@ -95,12 +99,20 @@ public class DicePresenter implements DsaPresenter {
                             .getFormula()
                             .print()
             );
-        } catch (NullPointerException e){
+        } catch (NullPointerException e) {
             view.onError(e.toString());
         }
 
     }
 
+    /**
+     * Tries to fetch the current profile saved in {@link SharedPreferences}.
+     *
+     * @return a set of profiles or default set
+     */
+    public String fetchProfilePref() {
+        return pref.getString(ConstantsGlobal.PREFERENCES_CURRENT_PROF, "");
+    }
 
     @Override
     public void onCreate() {
