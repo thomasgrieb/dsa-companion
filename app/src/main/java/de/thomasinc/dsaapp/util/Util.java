@@ -170,13 +170,13 @@ public class Util {
      * @return a normalized version that can be used as filename etc.
      */
     public static String normalizeString(String text){
-        String textNoWhitespace = text.trim().replace(" ","_");
+        String textNoWhitespace = text.trim().replaceAll(" ","_");
         String textLower = textNoWhitespace.toLowerCase();
         String textAscii = textLower
                 .replaceAll("ä","ae")
                 .replaceAll("ö","oe")
                 .replaceAll("ü","ue");
-        return textAscii.replace("[+-_.,;]","");
+        return textAscii.replaceAll("[+-.,;]","");
     }
 
 }
