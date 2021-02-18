@@ -8,6 +8,7 @@ import java.util.Set;
 
 import de.thomasinc.dsaapp.data.character.ProfileModel;
 import de.thomasinc.dsaapp.ui.DsaPresenter;
+import de.thomasinc.dsaapp.util.ConstantsGlobal;
 import de.thomasinc.dsaapp.util.Json;
 import de.thomasinc.dsaapp.util.Util;
 
@@ -21,7 +22,7 @@ public class ProfilePresenter implements DsaPresenter {
 
     public ProfilePresenter(ProfileActivity view, Context context) {
         this.view = view;
-        this.pref = context.getSharedPreferences("ProfilePrefs", 0);
+        this.pref = context.getSharedPreferences(ConstantsGlobal.PREFERENCES_FILE, 0);
         this.model = new ProfileModel();
         this.context = context;
     }

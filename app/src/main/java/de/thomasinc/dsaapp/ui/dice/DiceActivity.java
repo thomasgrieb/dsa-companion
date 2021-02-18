@@ -1,6 +1,4 @@
 package de.thomasinc.dsaapp.ui.dice;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
@@ -36,7 +34,6 @@ public class DiceActivity extends AppCompatActivity implements DsaView {
     private TextView qualityView;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,8 +41,8 @@ public class DiceActivity extends AppCompatActivity implements DsaView {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        catsDropdown =  (Spinner) findViewById(R.id.throwCatDropdown);
-        skillsDropdown =  (Spinner) findViewById(R.id.throwSkillDropdown);
+        catsDropdown = (Spinner) findViewById(R.id.throwCatDropdown);
+        skillsDropdown = (Spinner) findViewById(R.id.throwSkillDropdown);
         skillInfo = (TextView) findViewById(R.id.throwSkill);
         skillFormula = (TextView) findViewById(R.id.throwFormula);
         resultView0 = (TextView) findViewById(R.id.throwResult0);
@@ -104,7 +101,7 @@ public class DiceActivity extends AppCompatActivity implements DsaView {
         });
     }
 
-    private int checkForCrit(int dice){
+    private int checkForCrit(int dice) {
         if (dice == 1) {
             return getResources().getColor(R.color.colorCritSuccess);
         } else if (dice == 20) {
@@ -116,9 +113,10 @@ public class DiceActivity extends AppCompatActivity implements DsaView {
 
     /**
      * Fills first dropdown
+     *
      * @param cats skill categories
      */
-    public void fillCatDropdown(String[] cats){
+    public void fillCatDropdown(String[] cats) {
         ArrayAdapter<String> catsAdapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_dropdown_item, cats);
         catsDropdown.setAdapter(catsAdapter);
@@ -126,9 +124,10 @@ public class DiceActivity extends AppCompatActivity implements DsaView {
 
     /**
      * Fills second dropdown
+     *
      * @param skills skills from chosen skill category
      */
-    public void fillSkillDropdown(String[] skills){
+    public void fillSkillDropdown(String[] skills) {
         ArrayAdapter<String> skillAdapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_dropdown_item, skills);
         skillsDropdown.setAdapter(skillAdapter);
@@ -136,27 +135,30 @@ public class DiceActivity extends AppCompatActivity implements DsaView {
 
     /**
      * Sets skill label
+     *
      * @param skill chosen skill
      */
-    public void setSkillInfo(String skill){
+    public void setSkillInfo(String skill) {
         skillInfo.setText(skill);
     }
 
     /**
      * Sets skill formula label
+     *
      * @param formula formula for chosen skill
      */
-    public void setSkillFormula(String formula){
+    public void setSkillFormula(String formula) {
         skillFormula.setText(formula);
     }
 
     /**
      * Sets result labels
-     * @param first result of first dice
+     *
+     * @param first  result of first dice
      * @param second result of second dice
-     * @param third result of third dice
+     * @param third  result of third dice
      */
-    public void setDice(int first, int second, int third){
+    public void setDice(int first, int second, int third) {
         resultView0.setText(String.valueOf(first));
         resultView1.setText(String.valueOf(second));
         resultView2.setText(String.valueOf(third));
@@ -164,20 +166,21 @@ public class DiceActivity extends AppCompatActivity implements DsaView {
 
     /**
      * Sets throw quality label
+     *
      * @param q quality
      */
-    public void setQuality(int q){
+    public void setQuality(int q) {
         qualityView.setText(String.valueOf(q));
     }
 
     /**
      * Sets throw compansation label
+     *
      * @param c compensation
      */
-    public void setCompensate(int c){
+    public void setCompensate(int c) {
         compensateView.setText(String.valueOf(c));
     }
-
 
 
     @Override
