@@ -26,7 +26,7 @@ public class MainPresenter implements DsaPresenter {
     }
 
     /**
-     * Sets the current profile in the {@link SharedPreferences} and fo the model
+     * Sets the current profile in the {@link SharedPreferences} and for the model
      *
      * @param prof selected profile
      */
