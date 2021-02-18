@@ -8,6 +8,7 @@ import java.util.Set;
 
 import de.thomasinc.dsaapp.data.MainModel;
 import de.thomasinc.dsaapp.ui.DsaPresenter;
+import de.thomasinc.dsaapp.util.Json;
 
 public class MainPresenter implements DsaPresenter {
 
@@ -19,6 +20,8 @@ public class MainPresenter implements DsaPresenter {
         this.pref = context.getSharedPreferences("ProfilePrefs", 0);
         this.view = view;
         this.model = new MainModel(fetchProfilePref());
+        //Ensures that profile map file exists
+        Json.checkProfileMapFile(context);
     }
 
     /**
