@@ -38,7 +38,8 @@ public class DicePresenter implements DsaPresenter {
     public DicePresenter(DiceActivity view, Context context) {
         this.pref = context.getSharedPreferences(ConstantsGlobal.PREFERENCES_FILE, 0);
         this.view = view;
-        this.model = new DiceModel(Json.readCharFromJson(context, fetchProfilePref()), Util.makeSkillMap(context));
+        this.model = new DiceModel(Json.readCharFromJson(context, fetchCurrentProfileFromPref()),
+                Util.makeSkillMap(context));
     }
 
     /**
@@ -110,7 +111,7 @@ public class DicePresenter implements DsaPresenter {
      *
      * @return a set of profiles or default set
      */
-    public String fetchProfilePref() {
+    public String fetchCurrentProfileFromPref() {
         return pref.getString(ConstantsGlobal.PREFERENCES_CURRENT_PROF_KEY, "");
     }
 
