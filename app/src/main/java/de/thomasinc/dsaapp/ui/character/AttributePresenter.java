@@ -1,34 +1,89 @@
 package de.thomasinc.dsaapp.ui.character;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.util.Log;
+
+import java.util.HashMap;
 
 import de.thomasinc.dsaapp.data.character.AttributeModel;
-import de.thomasinc.dsaapp.data.character.Character;
 import de.thomasinc.dsaapp.ui.DsaPresenter;
+import de.thomasinc.dsaapp.util.ConstantsGlobal;
 import de.thomasinc.dsaapp.util.Json;
-import de.thomasinc.dsaapp.util.Util;
 
 public class AttributePresenter implements DsaPresenter {
 
-    private final AttributeActivity view = new AttributeActivity();
-    //private final AttributeModel model = new AttributeModel();
+    private AttributeActivity view;
+    private AttributeModel model;
+    private SharedPreferences pref;
+
 
     public AttributePresenter(AttributeActivity view, Context context){
-        //this.model = new AttributeModel();
+        this.pref = context.getSharedPreferences(ConstantsGlobal.PREFERENCES_FILE, 0);
+        this.view = view;
+        this.model = new AttributeModel(Json.readCharFromJson(context,
+                fetchCurrentProfileFromPref()));
     }
 
-    /*
-    private retrieveCharacter
-    if(Util.checkIfCharExists(context)){
-        Character c = Json.readCharFromJson(context);
-        int[] cAr = c.charBaseValuesToArray();
-
-        for(int i=0; i<8;i++) {
-            System.out.println(cAr[i]);
-            textArray[i].setText(String.valueOf(cAr[i]));
+    /**
+     * Calls {@link AttributeActivity#setEditTextValue} for every attribute in the map retrieved from
+     * the current character.
+     */
+    public void setAttributeBoxes(){
+        HashMap<String,Integer> attributes = model.getCharacter().charAttributesToMap();
+        System.out.println(attributes);
+        for(HashMap.Entry<String, Integer> pair : attributes.entrySet()){
+            view.setEditTextValue(pair.getKey(),pair.getValue());
         }
     }
-    */
+
+    /**
+     * Middleman method
+     * @return true if empty, false if not
+     */
+    public boolean checkField(String text){
+        return model.checkString(text);
+    }
+
+    /**
+     * Tries to fetch the current profile saved in {@link SharedPreferences}.
+     *
+     * @return a set of profiles or default set
+     */
+    public String fetchCurrentProfileFromPref() {
+        return pref.getString(ConstantsGlobal.PREFERENCES_CURRENT_PROF_KEY, "");
+    }
+
+    /**
+     * calls function from Util in order to write {@link Character} object to json
+     * adds the character name to {@link SharedPreferences} file
+     */
+    public void remakeChar(Context context) {
+        HashMap<String,Integer> attributes = model.getCharacter().charAttributesToMap();
+        for(String key: attributes.keySet()){
+            attributes.put(key, view.getEditTextValue(key));
+        }
+        model.buildChar(attributes);
+        Log.i("attrPres","New character attributes set to: " + attributes);
+        Json.writeCharToJson(context, model.getCharacter());
+    }
+
+    /**
+     * Middleman method
+     * @return max value
+     */
+    public int getMaxAttributeFromModel(){
+        return model.getAttributeMaxValue();
+    }
+
+    /**
+     * Middleman method
+     * @return min value
+     */
+    public int getMinAttributeFromModel(){
+        return model.getAttributeMinValue();
+    }
+
 
     @Override
     public void onCreate() {
@@ -37,6 +92,6 @@ public class AttributePresenter implements DsaPresenter {
 
     @Override
     public void onDestroy() {
-
+        view = null;
     }
 }

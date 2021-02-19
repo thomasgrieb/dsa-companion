@@ -1,4 +1,5 @@
 package de.thomasinc.dsaapp.ui.character;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -7,22 +8,17 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import org.json.JSONObject;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.Writer;
 
 import de.thomasinc.dsaapp.R;
 import de.thomasinc.dsaapp.data.character.Character;
+import de.thomasinc.dsaapp.ui.DsaView;
 import de.thomasinc.dsaapp.ui.main.MainActivity;
 import de.thomasinc.dsaapp.util.Json;
 import de.thomasinc.dsaapp.util.MinMaxValueFilter;
-import de.thomasinc.dsaapp.util.Util;
 
 /**
  * Implements functionality for the character value input window.
@@ -36,7 +32,7 @@ import de.thomasinc.dsaapp.util.Util;
  * Ends with returning the user to the {@link MainActivity}.
  */
 
-public class AttributeActivity extends AppCompatActivity {
+public class AttributeActivity extends AppCompatActivity implements DsaView {
 
     private AttributePresenter presenter;
 
@@ -48,17 +44,15 @@ public class AttributeActivity extends AppCompatActivity {
     private EditText editGE;
     private EditText editKO;
     private EditText editKK;
-    private final EditText[] textArray = {editMU,editKL,editIN,editCH,editFF,editGE,editKO,editKK};
+    private EditText[] textArray;
 
     private Button confirmBtn;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_character_base_value_input);
+        setContentView(R.layout.activity_character_attributes);
 
-        final String char_file = "myCharacter.json";
         final Context context = getApplicationContext();
 
         presenter = new AttributePresenter(this, context);
@@ -72,39 +66,36 @@ public class AttributeActivity extends AppCompatActivity {
         editKO = findViewById(R.id.inputKo);
         editKK = findViewById(R.id.inputKK);
 
+        this.textArray = new EditText[]{editMU,editKL,editIN,editCH,editFF,editGE,editKO,editKK};
+
         confirmBtn = (Button) findViewById(R.id.buttonCharConf);
+        confirmBtn.setEnabled(true);
 
+        presenter.setAttributeBoxes();
 
-        //If values are already set, confirmation button is enabled from the start due to this code
-        // snippet
-
-        //presenter.
-        /*
-        if(!Util.checkIfAnyEmptyArray(textArray)){
-            confirmBtn.setEnabled(true);
-        }
-        */
-
-        for(int i=0; i<8;i++) {
-            //Adjust minimum und maximum input values for character here (inclusive)
-            //Current: 0 - 19
-            textArray[i].setFilters(new InputFilter[]{new MinMaxValueFilter(0,19)});
-            textArray[i].addTextChangedListener(new TextWatcher() {
+        for (EditText editText : textArray) {
+            Log.i("attrView","Setting up Filter" +
+                    " for " + editText.getTag() +
+                    " with Max = " + presenter.getMaxAttributeFromModel() +
+                    " and Min = " + presenter.getMinAttributeFromModel());
+            editText.setFilters(new InputFilter[]{new MinMaxValueFilter(
+                    presenter.getMinAttributeFromModel(),
+                    presenter.getMaxAttributeFromModel())});
+            editText.addTextChangedListener(new TextWatcher() {
                 @Override
-                public void beforeTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {}
+                public void beforeTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) { }
 
                 @Override
-                public void onTextChanged(CharSequence cs, int arg1, int arg2, int arg3) {}
+                public void onTextChanged(CharSequence cs, int arg1, int arg2, int arg3) { }
 
                 @Override
                 public void afterTextChanged(Editable s) {
-                    /*
-                    if (!Util.checkIfAnyEmptyArray(textArray)) {
-                        confirmBtn.setEnabled(true);
-                    } else{
-                        confirmBtn.setEnabled(false);
+                    confirmBtn.setEnabled(true);
+                    for (EditText editText : textArray) {
+                        if (presenter.checkField(editText.getText().toString())){
+                            confirmBtn.setEnabled(false);
+                        }
                     }
-                     */
                 }
             });
         }
@@ -112,22 +103,8 @@ public class AttributeActivity extends AppCompatActivity {
         confirmBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-
                 //TODO: get char for current profile and write only new values to file
-
-                //eigl model
-                Character c = new Character.CharBuilder("placeholder")
-                        .mu(Integer.parseInt(editMU.getText().toString()))
-                        .kl(Integer.parseInt(editKL.getText().toString()))
-                        .in(Integer.parseInt(editIN.getText().toString()))
-                        .ch(Integer.parseInt(editCH.getText().toString()))
-                        .ff(Integer.parseInt(editFF.getText().toString()))
-                        .ge(Integer.parseInt(editGE.getText().toString()))
-                        .ko(Integer.parseInt(editKO.getText().toString()))
-                        .kk(Integer.parseInt(editKK.getText().toString()))
-                        .build();
-
-                Json.writeCharToJson(context,c);
+                presenter.remakeChar(getApplicationContext());
                 startActivity(new Intent( AttributeActivity.this, MainActivity.class));
             }
         });
@@ -137,5 +114,48 @@ public class AttributeActivity extends AppCompatActivity {
         this.confirmBtn.setEnabled(status);
     }
 
+    /**
+     * Iterates over the {@link EditText} objects and compares their tags with the specified tag.
+     * If the correct object is found, sets its text to the specified value.
+     * @param value attribute value
+     * @param tag attribute tag
+     */
+    public void setEditTextValue(String tag, int value){
+        for(EditText editText: textArray){
+            if (editText.getTag().equals(tag)){
+                System.out.println(editText);
+                editText.setText(String.valueOf(value));
+                break;
+            }
+        }
+    }
 
+    /**
+     * Iterates over the {@link EditText} objects and compares their tags with the specified tag
+     * in order to find the one with the specified tag.
+     * @param tag attribute tag
+     * @return value of box with tag
+     */
+    public int getEditTextValue(String tag){
+        for(EditText editText: textArray){
+            if (editText.getTag().equals(tag)){
+                return Integer.parseInt(editText.getText().toString());
+            }
+        }
+        return 0;
+    }
+
+
+
+    @Override
+    public void onError(String errormsg) {
+        //from
+        // https://stackoverflow.com/questions/2115758/how-do-i-display-an-alert-dialog-on-android
+        new AlertDialog.Builder(this)
+                .setTitle("Fehler")
+                .setMessage(errormsg)
+                .setNeutralButton(android.R.string.ok, null)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
+    }
 }
