@@ -21,7 +21,7 @@
 
     <string name="charscreen_title">Charakter</string>
     <string name="charscreen_text">Bitte hier Charakterwerte angeben und \nbestätigen zum
-        Speichern. \nEs sind lediglch Werte von 0 bis 19 gestattet.</string>
+        Speichern. \nEs sind lediglich Werte von 0 bis 19 gestattet.</string>
     <string name="charscreen_mu">MU</string>
     <string name="charscreen_kl">KL</string>
     <string name="charscreen_in">IN</string>
