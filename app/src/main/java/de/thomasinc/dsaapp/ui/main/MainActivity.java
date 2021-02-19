@@ -1,5 +1,6 @@
 package de.thomasinc.dsaapp.ui.main;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -37,6 +38,7 @@ public class MainActivity extends AppCompatActivity implements DsaView {
         throwButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
+                presenter.onDestroy();
                 startActivity(new Intent(MainActivity.this, DiceActivity.class));
             }
         });
@@ -46,6 +48,7 @@ public class MainActivity extends AppCompatActivity implements DsaView {
         exitButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
+                presenter.onDestroy();
                 finishAndRemoveTask();
             }
         });
@@ -55,6 +58,7 @@ public class MainActivity extends AppCompatActivity implements DsaView {
         charButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
+                presenter.onDestroy();
                 startActivity(new Intent(MainActivity.this, CharacterInputDialog.class));
             }
         });
@@ -85,6 +89,13 @@ public class MainActivity extends AppCompatActivity implements DsaView {
 
     @Override
     public void onError(String errormsg) {
-
+        //from
+        // https://stackoverflow.com/questions/2115758/how-do-i-display-an-alert-dialog-on-android
+        new AlertDialog.Builder(this)
+                .setTitle("Fehler")
+                .setMessage(errormsg)
+                .setNeutralButton(android.R.string.ok, null)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
     }
 }

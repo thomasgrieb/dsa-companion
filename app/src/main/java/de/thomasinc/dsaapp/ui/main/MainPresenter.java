@@ -82,6 +82,6 @@ public class MainPresenter implements DsaPresenter {
 
     @Override
     public void onDestroy() {
-
+        view = null;
     }
 }
