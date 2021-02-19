@@ -59,7 +59,7 @@ public class ProfilePresenter implements DsaPresenter {
      * adds the character name to {@link SharedPreferences} file
      */
     public void createProfile() {
-        final String profilesKey = "profiles";
+        final String profilesKey = ConstantsGlobal.PREFERENCES_PROFILE_LIST_KEY;
         Json.writeCharToJson(context, model.buildCharNameOnly());
         Set<String> prof = new HashSet<String>(
                 pref.getStringSet(profilesKey, new HashSet<String>()));
