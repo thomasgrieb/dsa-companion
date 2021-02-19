@@ -40,8 +40,10 @@
         android:inputType="number"
         android:text=""
         android:hint="@string/charscreen_mu"
+        android:tag="inputMu"
         app:layout_constraintEnd_toStartOf="@+id/inputKl"
-        app:layout_constraintTop_toTopOf="@+id/inputKl" />
+        app:layout_constraintTop_toTopOf="@+id/inputKl"
+        android:autofillHints="" />
 
     <TextView
         android:id="@+id/tagMu"
@@ -62,9 +64,11 @@
         android:hint="@string/charscreen_kl"
         android:inputType="number"
         android:text=""
+        android:tag="inputKl"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        app:layout_constraintTop_toBottomOf="@+id/textView3"
+        android:autofillHints="" />
 
     <TextView
         android:id="@+id/tagKl"
@@ -85,8 +89,10 @@
         android:inputType="number"
         android:text=""
         android:hint="@string/charscreen_in"
+        android:tag="inputIn"
         app:layout_constraintStart_toEndOf="@+id/inputKl"
-        app:layout_constraintTop_toTopOf="@+id/inputKl" />
+        app:layout_constraintTop_toTopOf="@+id/inputKl"
+        android:autofillHints="" />
 
     <TextView
         android:id="@+id/tagIn"
@@ -107,8 +113,10 @@
         android:hint="@string/charscreen_ch"
         android:inputType="number"
         android:text=""
+        android:tag="inputCh"
         app:layout_constraintEnd_toStartOf="@+id/inputFF"
-        app:layout_constraintTop_toTopOf="@+id/inputFF" />
+        app:layout_constraintTop_toTopOf="@+id/inputFF"
+        android:autofillHints="" />
 
     <TextView
         android:id="@+id/tagCh"
@@ -129,10 +137,12 @@
         android:hint="@string/charscreen_ff"
         android:inputType="number"
         android:text=""
+        android:tag="inputFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inputKl" />
+        app:layout_constraintTop_toBottomOf="@+id/inputKl"
+        android:autofillHints="" />
 
     <TextView
         android:id="@+id/tagFF"
@@ -153,8 +163,10 @@
         android:hint="@string/charscreen_ge"
         android:inputType="number"
         android:text=""
+        android:tag="inputGe"
         app:layout_constraintStart_toEndOf="@+id/inputFF"
-        app:layout_constraintTop_toTopOf="@+id/inputFF" />
+        app:layout_constraintTop_toTopOf="@+id/inputFF"
+        android:autofillHints="" />
 
     <TextView
         android:id="@+id/tagGe"
@@ -175,10 +187,12 @@
         android:hint="@string/charscreen_ko"
         android:inputType="number"
         android:text=""
+        android:tag="inputKo"
         app:layout_constraintEnd_toStartOf="@+id/inputFF"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inputFF" />
+        app:layout_constraintTop_toBottomOf="@+id/inputFF"
+        android:autofillHints="" />
 
     <TextView
         android:id="@+id/tagKo"
@@ -200,9 +214,11 @@
         android:hint="@string/charscreen_kk"
         android:inputType="number"
         android:text=""
+        android:tag="inputKK"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/inputFF"
-        app:layout_constraintTop_toBottomOf="@+id/inputFF" />
+        app:layout_constraintTop_toBottomOf="@+id/inputFF"
+        android:autofillHints="" />
 
     <TextView
         android:id="@+id/tagKK"
