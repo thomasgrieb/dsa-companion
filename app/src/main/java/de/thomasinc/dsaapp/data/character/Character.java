@@ -5,13 +5,13 @@ import java.util.HashMap;
 import de.thomasinc.dsaapp.data.Skill;
 
 /**
- * Defines the Character object
+ * Defines the Character object.
  * Every character object has three groups of main attributes:
- *  one unique name, nine character attributes and an arbitrary number of skills
- *  The name is represented by a {@link String}
- *  The character attributes (also called abilities) are represented by nine {@link Integer}s
- *  The skills represented by a {@link HashMap}
- * Uses the Builder Pattern due to number of parameters
+ * one unique name, nine character attributes and an arbitrary number of skills.
+ * The name is represented by a {@link String}.
+ * The character attributes (also called abilities) are represented by nine {@link Integer}s.
+ * The skills represented by a {@link HashMap}.
+ * Uses the Builder Pattern due to number of parameters.
  * TODO: Consider combining abilities into HashMap?
  */
 public class Character {
@@ -27,30 +27,6 @@ public class Character {
     private final HashMap<String, Integer> abilityMap = new HashMap<>();
     private HashMap<Skill, Integer> skillMap = new HashMap<>();
     private String name;
-
-    /*
-    public Character(String name, int mu, int kl, int in, int ch, int ff, int ge, int ko, int kk,
-                     HashMap<Skill, Integer> skills) {
-        this.name = name;
-        this.mu = mu;
-        this.kl = kl;
-        this.in = in;
-        this.ch = ch;
-        this.ff = ff;
-        this.ge = ge;
-        this.ko = ko;
-        this.kk = kk;
-        this.abilityMap.put("MU", mu);
-        this.abilityMap.put("KL", kl);
-        this.abilityMap.put("IN", in);
-        this.abilityMap.put("CH", ch);
-        this.abilityMap.put("FF", ff);
-        this.abilityMap.put("GE", ge);
-        this.abilityMap.put("KO", ko);
-        this.abilityMap.put("KK", kk);
-        this.skillMap = skills;
-    }
-     */
 
     /**
      * Empty Constructor
@@ -140,10 +116,10 @@ public class Character {
     }
 
     /**
-     * Implements find and return method for the abilityMap
+     * Implements find and return method for the abilityMap.
      *
-     * @param s
-     * @return ability score or 0 if nonexistant
+     * @param s attribute
+     * @return attribute value or 0 if nonexistant
      */
     public int get(String s) {
         if (abilityMap.containsKey(s)) {
@@ -154,13 +130,21 @@ public class Character {
     }
 
     /**
-     * creates an array representation of the ability scores
+     * Creates a {@link HashMap} representation of the attributes.
      *
-     * @return {@link Integer} array of ability scores
+     * @return map of attributes (tag:value)
      */
-    public int[] charBaseValuesToArray() {
-        int[] ar = {mu, kl, in, ch, ff, ge, ko, kk};
-        return ar;
+    public HashMap<String, Integer> charAttributesToMap() {
+        HashMap<String, Integer> map = new HashMap<>();
+        map.put("MU", mu);
+        map.put("KL", kl);
+        map.put("IN", in);
+        map.put("CH", ch);
+        map.put("FF", ff);
+        map.put("GE", ge);
+        map.put("KO", ko);
+        map.put("KK", kk);
+        return map;
     }
 
     /**
@@ -180,7 +164,8 @@ public class Character {
         private final String name;
 
         /**
-         * Sets defaults for character attributes to 8
+         * Sets defaults for character attributes to 8.
+         *
          * @param name characters name
          */
         public CharBuilder(String name) {
