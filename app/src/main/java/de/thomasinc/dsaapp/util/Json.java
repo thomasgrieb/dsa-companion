@@ -142,8 +142,10 @@ public class Json {
         try {
             assert json != null;
             JSONObject obj = new JSONObject(json);
-            if (obj.get(CHARACTER_NAME_KEY) != name) {
-                Log.e("json", "Name given to function does not match name in file!");
+            if (!obj.get(CHARACTER_NAME_KEY).equals(name)) {
+                Log.e("json", "Name given to function does not match name in file!" +
+                        "File: '" + obj.get(CHARACTER_NAME_KEY) + "' != " +
+                        "Profile: '" + name + "'");
             }
             JSONObject attrObj = obj.getJSONObject(CHARACTER_ATTRIBUTE_KEY);
             Iterator<String> it = attrObj.keys();
