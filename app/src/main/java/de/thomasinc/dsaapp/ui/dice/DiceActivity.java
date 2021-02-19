@@ -187,7 +187,7 @@ public class DiceActivity extends AppCompatActivity implements DsaView {
     public void onError(String errormsg) {
         //from
         // https://stackoverflow.com/questions/2115758/how-do-i-display-an-alert-dialog-on-android
-        new AlertDialog.Builder(getApplicationContext())
+        new AlertDialog.Builder(this)
                 .setTitle("Fehler")
                 .setMessage(errormsg)
                 .setNeutralButton(android.R.string.ok, null)
