@@ -129,9 +129,9 @@ public class Util {
     }
 
     /**
-     * Function for checking whether a EditText-Object is empty or not
-     * @param text a single {@link EditText} object
-     * @return boolean, false if not empty, true if empty
+     * Function for checking whether a text is empty or not
+     * @param text text to check
+     * @return false if not empty, true if empty
      */
     public static boolean checkIfEmpty(String text) {
         return text.trim().length() == 0;
