@@ -105,7 +105,8 @@ public class AttributeActivity extends AppCompatActivity implements DsaView {
             public void onClick(View v){
                 //TODO: get char for current profile and write only new values to file
                 presenter.remakeChar(getApplicationContext());
-                startActivity(new Intent( AttributeActivity.this, MainActivity.class));
+                startActivity(new Intent( AttributeActivity.this,
+                        CharacterEditorActivity.class));
             }
         });
     }
