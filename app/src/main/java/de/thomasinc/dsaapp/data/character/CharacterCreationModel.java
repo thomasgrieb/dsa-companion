@@ -2,11 +2,11 @@ package de.thomasinc.dsaapp.data.character;
 
 import de.thomasinc.dsaapp.data.DsaModel;
 
-public class ProfileModel implements DsaModel {
+public class CharacterCreationModel implements DsaModel {
 
     private String name;
 
-    public ProfileModel() {
+    public CharacterCreationModel() {
     }
 
     /**

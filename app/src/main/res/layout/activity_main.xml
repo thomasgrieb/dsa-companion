@@ -85,7 +85,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="12dp"
-        android:text="@string/profile_bar_description"
+        android:text="@string/characters_bar_description"
         app:layout_constraintBottom_toTopOf="@+id/profileBar"
         app:layout_constraintEnd_toEndOf="@+id/profileBar"
         app:layout_constraintStart_toStartOf="@+id/profileBar" />

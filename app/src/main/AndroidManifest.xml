@@ -10,12 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DSAApp">
         <activity
-            android:name=".CharacterInputDialog"
+            android:name=".ui.character.CharacterEditorActivity"
             android:parentActivityName=".ui.main.MainActivity" />
         <activity android:name=".CharacterSkillValueInput" />
         <activity
-            android:name=".ui.character.ProfileActivity"
-            android:parentActivityName=".CharacterInputDialog" />
+            android:name=".ui.character.CharacterCreationActivity"
+            android:parentActivityName=".ui.character.CharacterEditorActivity" />
         <activity
             android:name=".ui.dice.DiceActivity"
             android:parentActivityName=".ui.main.MainActivity" />

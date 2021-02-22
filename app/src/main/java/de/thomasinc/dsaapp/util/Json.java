@@ -60,7 +60,7 @@ public class Json {
      *
      * @param context applications context
      */
-    public static void checkProfileMapFile(Context context) {
+    public static void checkCharacterMapFile(Context context) {
         File profileFile = new File(context.getFilesDir(), PROFILE_MAP);
         if (!profileFile.exists()) {
             try {

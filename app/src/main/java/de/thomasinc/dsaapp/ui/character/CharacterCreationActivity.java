@@ -11,23 +11,22 @@ import android.widget.EditText;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import de.thomasinc.dsaapp.CharacterInputDialog;
 import de.thomasinc.dsaapp.R;
 import de.thomasinc.dsaapp.ui.DsaView;
 
 
 /**
- * Implements functionality for the profile creation window.
+ * Implements functionality for the character creation window.
  * TODO: add support for Optolith json file - Users should be able to create a new Profile from
  * a given Optolith-created json file
  * TODO: prohibit disruptive signs in profile name in order to create valid filename
  * TODO: add confirmation dialog or message and warning if char already exists
- * User enters a characters name; by clicking on the confirmation button, the program checks the existing
- * files for duplicates and number of files (currently one 5 profiles supported)
+ * User enters a characters name; by clicking on the confirmation button, the program checks the
+ * existing files for duplicates and number of files
  */
-public class ProfileActivity extends AppCompatActivity implements DsaView {
+public class CharacterCreationActivity extends AppCompatActivity implements DsaView {
 
-    private ProfilePresenter presenter;
+    private CharacterCreationPresenter presenter;
 
     private Button confBtn;
     private EditText nameInput;
@@ -35,11 +34,11 @@ public class ProfileActivity extends AppCompatActivity implements DsaView {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile_creation);
+        setContentView(R.layout.activity_character_creation);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        presenter = new ProfilePresenter(this, getApplicationContext());
+        presenter = new CharacterCreationPresenter(this, getApplicationContext());
 
         confBtn = (Button) findViewById(R.id.buttonProfConf);
         confBtn.setEnabled(false);
@@ -66,9 +65,9 @@ public class ProfileActivity extends AppCompatActivity implements DsaView {
         confBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                presenter.createProfile();
-                startActivity(new Intent(ProfileActivity.this,
-                        CharacterInputDialog.class));
+                presenter.createCharacter();
+                startActivity(new Intent(CharacterCreationActivity.this,
+                        CharacterEditorActivity.class));
             }
         });
 

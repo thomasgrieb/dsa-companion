@@ -22,12 +22,12 @@ public class AttributePresenter implements DsaPresenter {
         this.pref = context.getSharedPreferences(ConstantsGlobal.PREFERENCES_FILE, 0);
         this.view = view;
         this.model = new AttributeModel(Json.readCharFromJson(context,
-                fetchCurrentProfileFromPref()));
+                fetchCurrentCharacterFromPref()));
     }
 
     /**
-     * Calls {@link AttributeActivity#setEditTextValue} for every attribute in the map retrieved from
-     * the current character.
+     * Calls {@link AttributeActivity#setEditTextValue} for every attribute in the map retrieved
+     * from the current character.
      */
     public void setAttributeBoxes(){
         HashMap<String,Integer> attributes = model.getCharacter().charAttributesToMap();
@@ -50,8 +50,8 @@ public class AttributePresenter implements DsaPresenter {
      *
      * @return a set of profiles or default set
      */
-    public String fetchCurrentProfileFromPref() {
-        return pref.getString(ConstantsGlobal.PREFERENCES_CURRENT_PROF_KEY, "");
+    public String fetchCurrentCharacterFromPref() {
+        return pref.getString(ConstantsGlobal.PREFERENCES_CURRENT_CHAR_KEY, "");
     }
 
     /**

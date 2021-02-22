@@ -11,7 +11,7 @@ public class MainModel implements DsaModel{
         this.profiles = profiles;
     }
 
-    public void setCurrentProfile(String currentProfile) {
+    public void setCurrentCharacter(String currentProfile) {
         this.currentProfile = currentProfile;
     }
 
@@ -19,7 +19,7 @@ public class MainModel implements DsaModel{
         return currentProfile;
     }
 
-    public Set<String> getProfiles() {
+    public Set<String> getCharacters() {
         return profiles;
     }
 

@@ -6,24 +6,24 @@ import android.content.SharedPreferences;
 import java.util.HashSet;
 import java.util.Set;
 
-import de.thomasinc.dsaapp.data.character.ProfileModel;
+import de.thomasinc.dsaapp.data.character.CharacterCreationModel;
 import de.thomasinc.dsaapp.ui.DsaPresenter;
 import de.thomasinc.dsaapp.util.ConstantsGlobal;
 import de.thomasinc.dsaapp.util.Json;
 import de.thomasinc.dsaapp.util.Util;
 
-public class ProfilePresenter implements DsaPresenter {
+public class CharacterCreationPresenter implements DsaPresenter {
 
-    private ProfileActivity view;
-    private ProfileModel model;
+    private CharacterCreationActivity view;
+    private CharacterCreationModel model;
     private SharedPreferences pref;
     private Context context;
 
 
-    public ProfilePresenter(ProfileActivity view, Context context) {
+    public CharacterCreationPresenter(CharacterCreationActivity view, Context context) {
         this.view = view;
         this.pref = context.getSharedPreferences(ConstantsGlobal.PREFERENCES_FILE, 0);
-        this.model = new ProfileModel();
+        this.model = new CharacterCreationModel();
         this.context = context;
     }
 
@@ -58,8 +58,8 @@ public class ProfilePresenter implements DsaPresenter {
      * calls function from Util in order to write {@link Character} object to json
      * adds the character name to {@link SharedPreferences} file
      */
-    public void createProfile() {
-        final String profilesKey = ConstantsGlobal.PREFERENCES_PROFILE_LIST_KEY;
+    public void createCharacter() {
+        final String profilesKey = ConstantsGlobal.PREFERENCES_CHARACTER_LIST_KEY;
         Json.writeCharToJson(context, model.buildCharNameOnly());
         Set<String> prof = new HashSet<String>(
                 pref.getStringSet(profilesKey, new HashSet<String>()));
