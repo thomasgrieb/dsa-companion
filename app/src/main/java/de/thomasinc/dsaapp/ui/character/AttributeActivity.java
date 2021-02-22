@@ -53,6 +53,8 @@ public class AttributeActivity extends AppCompatActivity implements DsaView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_character_attributes);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         final Context context = getApplicationContext();
 
         presenter = new AttributePresenter(this, context);

@@ -12,7 +12,9 @@
         <activity
             android:name=".ui.character.CharacterEditorActivity"
             android:parentActivityName=".ui.main.MainActivity" />
-        <activity android:name=".CharacterSkillValueInput" />
+        <activity
+            android:name=".CharacterSkillValueInput"
+            android:parentActivityName=".ui.character.CharacterEditorActivity" />
         <activity
             android:name=".ui.character.CharacterCreationActivity"
             android:parentActivityName=".ui.character.CharacterEditorActivity" />
@@ -21,7 +23,9 @@
             android:parentActivityName=".ui.main.MainActivity" />
         <activity android:name=".Skills" />
         <activity android:name=".SkillsKat" />
-        <activity android:name=".ui.character.AttributeActivity" />
+        <activity
+            android:name=".ui.character.AttributeActivity"
+            android:parentActivityName=".ui.character.CharacterEditorActivity" />
         <activity android:name=".ui.main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
