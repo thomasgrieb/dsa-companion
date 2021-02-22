@@ -42,6 +42,7 @@ public class SkillsCatActivity extends AppCompatActivity {
                 intent.putExtra(ConstantsGlobal.EXTRA_SKILL_CAT,
                         presenter.resolveCat(getApplicationContext(), position));
                 startActivity(intent);
+                presenter.onDestroy();
             }
         });
     }
