@@ -34,7 +34,7 @@ public class CharacterCreationPresenter implements DsaPresenter {
      * @param name characters name
      */
     public void checkName(String name) {
-        //TODO Work on a better implementation of the warning.
+        //TODO Work on a better implementation of the warnings.
         // Current implementation causes alert dialog to appear immediately after typing a
         // prohibited sign and, if the user continues typing, displays the dialog after every
         // new character.
@@ -50,7 +50,16 @@ public class CharacterCreationPresenter implements DsaPresenter {
                 view.onError("Es sind nur Buchstaben, Zahlen, die Sonderzeichen " +
                         "'ä', 'ö', 'ü', 'Ä', 'Ö', 'Ü', '+', '-', '_', '.', ',', ';'" +
                         " und Leertaste im Charakternamen erlaubt.");
+                view.setConfBtnStatus(false);
             }
+        }
+        Set<String> prof = new HashSet<String>(
+                pref.getStringSet(ConstantsGlobal.PREFERENCES_CHARACTER_LIST_KEY,
+                        new HashSet<String>()));
+        if(prof.contains(name)){
+            view.onError("Ein Charakter mit diesem Namen existiert bereits. " +
+                    "Bitte anderen Namen wählen");
+            view.setConfBtnStatus(false);
         }
     }
 
@@ -59,13 +68,13 @@ public class CharacterCreationPresenter implements DsaPresenter {
      * adds the character name to {@link SharedPreferences} file
      */
     public void createCharacter() {
-        final String profilesKey = ConstantsGlobal.PREFERENCES_CHARACTER_LIST_KEY;
         Json.writeCharToJson(context, model.buildCharNameOnly());
         Set<String> prof = new HashSet<String>(
-                pref.getStringSet(profilesKey, new HashSet<String>()));
+                pref.getStringSet(ConstantsGlobal.PREFERENCES_CHARACTER_LIST_KEY,
+                        new HashSet<String>()));
         prof.add(model.getName());
         SharedPreferences.Editor editor = pref.edit();
-        editor.putStringSet(profilesKey, prof).apply();
+        editor.putStringSet(ConstantsGlobal.PREFERENCES_CHARACTER_LIST_KEY, prof).apply();
     }
 
     @Override
