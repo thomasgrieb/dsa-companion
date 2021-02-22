@@ -123,7 +123,6 @@ public class AttributeActivity extends AppCompatActivity implements DsaView {
     public void setEditTextValue(String tag, int value){
         for(EditText editText: textArray){
             if (editText.getTag().equals(tag)){
-                System.out.println(editText);
                 editText.setText(String.valueOf(value));
                 break;
             }

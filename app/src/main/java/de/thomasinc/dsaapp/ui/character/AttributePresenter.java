@@ -31,14 +31,13 @@ public class AttributePresenter implements DsaPresenter {
      */
     public void setAttributeBoxes(){
         HashMap<String,Integer> attributes = model.getCharacter().charAttributesToMap();
-        System.out.println(attributes);
         for(HashMap.Entry<String, Integer> pair : attributes.entrySet()){
             view.setEditTextValue(pair.getKey(),pair.getValue());
         }
     }
 
     /**
-     * Middleman method
+     * Middleman method.
      * @return true if empty, false if not
      */
     public boolean checkField(String text){
@@ -55,8 +54,8 @@ public class AttributePresenter implements DsaPresenter {
     }
 
     /**
-     * calls function from Util in order to write {@link Character} object to json
-     * adds the character name to {@link SharedPreferences} file
+     * Calls function from Util in order to write {@link Character} object to json.
+     * Adds the character name to {@link SharedPreferences} file
      */
     public void remakeChar(Context context) {
         HashMap<String,Integer> attributes = model.getCharacter().charAttributesToMap();
@@ -64,12 +63,13 @@ public class AttributePresenter implements DsaPresenter {
             attributes.put(key, view.getEditTextValue(key));
         }
         model.buildChar(attributes);
-        Log.i("attrPres","New character attributes set to: " + attributes);
         Json.writeCharToJson(context, model.getCharacter());
+        Log.i("attrPres","Saved character " + model.getCharacter().getName() +
+                " with new attributes: " + model.getCharacter().charAttributesToMap());
     }
 
     /**
-     * Middleman method
+     * Middleman method.
      * @return max value
      */
     public int getMaxAttributeFromModel(){
@@ -77,7 +77,7 @@ public class AttributePresenter implements DsaPresenter {
     }
 
     /**
-     * Middleman method
+     * Middleman method.
      * @return min value
      */
     public int getMinAttributeFromModel(){
