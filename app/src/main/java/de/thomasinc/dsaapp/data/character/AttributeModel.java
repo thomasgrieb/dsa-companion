@@ -17,7 +17,7 @@ public class AttributeModel implements DsaModel {
     }
 
     public void buildChar(HashMap<String,Integer> attrMap) {
-        new Character.CharBuilder(character.getName())
+        character = new Character.CharBuilder(character.getName())
                 .mu(attrMap.get("MU"))
                 .kl(attrMap.get("KL"))
                 .in(attrMap.get("IN"))
