@@ -42,7 +42,7 @@
     <string name="char_creat_text_title">Charaktererstellung</string>
     <string name="char_creat_edittext_name">Bitte Charaktername eingeben</string>
     <string name="char_creat_text_desc">Hier kann ein neuer Charakter angelegt
-        werden. Entsprechende Charakterwerte können in den anderen Fenester angegeben werden.
+        werden. Entsprechende Charakterwerte können in den anderen Fenstern angegeben werden.
     </string>
 
     #Character attributes screen
