@@ -19,7 +19,7 @@ public class CharacterSkillValueInput extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_char_skill_values);
+        setContentView(R.layout.activity_skill_values);
 
         final Button confirmBtn = (Button) findViewById(R.id.charSkillsConfirmButton);
 
