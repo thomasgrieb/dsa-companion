@@ -21,8 +21,12 @@
         <activity
             android:name=".ui.dice.DiceActivity"
             android:parentActivityName=".ui.main.MainActivity" />
-        <activity android:name=".Skills" />
-        <activity android:name=".SkillsKat" />
+        <activity
+            android:name=".ui.character.SkillsActivity"
+            android:parentActivityName=".ui.character.SkillsCatActivity" />
+        <activity
+            android:name=".ui.character.SkillsCatActivity"
+            android:parentActivityName=".ui.character.CharacterEditorActivity" />
         <activity
             android:name=".ui.character.AttributeActivity"
             android:parentActivityName=".ui.character.CharacterEditorActivity" />
