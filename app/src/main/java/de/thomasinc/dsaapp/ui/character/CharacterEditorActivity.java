@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.Button;
 
 import de.thomasinc.dsaapp.R;
-import de.thomasinc.dsaapp.SkillsKat;
 
 /**
  * Displays a window where the user can choose between creating a character,
@@ -42,7 +41,7 @@ public class CharacterEditorActivity extends AppCompatActivity {
             @Override
             public void onClick(View v){
                 Intent intent = new Intent(CharacterEditorActivity.this,
-                        SkillsKat.class);
+                        SkillsCatActivity.class);
                 startActivity(intent);
             }
         });

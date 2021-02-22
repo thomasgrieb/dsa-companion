@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".SkillsKat">
+    tools:context=".ui.character.SkillsCatActivity">
 
     <ListView
         android:id="@+id/skillKatListView"
