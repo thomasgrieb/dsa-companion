@@ -28,11 +28,27 @@ import de.thomasinc.dsaapp.data.character.Character;
 
 public class Json {
 
+    // json file ending
     private static final String FILE_ENDING_JSON = ".json";
-    private static final String PROFILE_MAP = "profilemap" + FILE_ENDING_JSON;
-    private static final String CHARACTER_NAME_KEY = "Name";
-    private static final String CHARACTER_ATTRIBUTE_KEY = "Attributes";
 
+    // filename of profile map file
+    private static final String PROFILE_MAP_FILENAME = "profilemap" + FILE_ENDING_JSON;
+
+    // key for retrieving name from character file
+    private static final String CF_KEY_CHARACTER_NAME = "Name";
+    // key for retrieving attributes from character file
+    private static final String CF_KEY_CHARACTER_ATTRIBUTE = "Attributes";
+
+    // filename of skill file
+    private static final String SKILL_FILENAME = "skills" + FILE_ENDING_JSON;
+    // keys for retrieving skill details
+    private static final String SF_SKILL_ID = "id";
+    private static final String SF_SKILL_NAME = "name";
+    private static final String SF_SKILL_CAT = "cat";
+    private static final String SF_SKILL_FORMULA = "formula";
+
+    // filename of skill categories file
+    private static final String SKILL_CATS_FILENAME = "skill-categories" + FILE_ENDING_JSON;
 
     /**
      * Reads the skills from the json file saved in the apps' assets folder
@@ -129,7 +145,7 @@ public class Json {
      * @param context applications context
      */
     public static void checkCharacterMapFile(Context context) {
-        File profileFile = new File(context.getFilesDir(), PROFILE_MAP);
+        File profileFile = new File(context.getFilesDir(), PROFILE_MAP_FILENAME);
         if (!profileFile.exists()) {
             try {
                 profileFile.createNewFile();
@@ -153,7 +169,7 @@ public class Json {
         JSONObject jobjMap = new JSONObject();
         try {
             BufferedReader reader = new BufferedReader(new InputStreamReader(
-                    context.openFileInput(PROFILE_MAP), StandardCharsets.UTF_8));
+                    context.openFileInput(PROFILE_MAP_FILENAME), StandardCharsets.UTF_8));
             String json = reader.readLine();
             if (json != null) {
                 try {
@@ -198,7 +214,6 @@ public class Json {
         ArrayList<Integer> attrList = new ArrayList<>();
         String json = null;
         try {
-            System.out.println(filename);
             BufferedReader reader = new BufferedReader(new InputStreamReader(
                     context.openFileInput(filename), StandardCharsets.UTF_8));
             json = reader.readLine();
@@ -210,12 +225,12 @@ public class Json {
         try {
             assert json != null;
             JSONObject obj = new JSONObject(json);
-            if (!obj.get(CHARACTER_NAME_KEY).equals(name)) {
+            if (!obj.get(CF_KEY_CHARACTER_NAME).equals(name)) {
                 Log.e("json", "Name given to function does not match name in file!" +
-                        "File: '" + obj.get(CHARACTER_NAME_KEY) + "' != " +
+                        "File: '" + obj.get(CF_KEY_CHARACTER_NAME) + "' != " +
                         "Profile: '" + name + "'");
             }
-            JSONObject attrObj = obj.getJSONObject(CHARACTER_ATTRIBUTE_KEY);
+            JSONObject attrObj = obj.getJSONObject(CF_KEY_CHARACTER_ATTRIBUTE);
             Iterator<String> it = attrObj.keys();
             while (it.hasNext()) {
                 attrList.add(attrObj.getInt(it.next()));
@@ -223,8 +238,8 @@ public class Json {
         } catch (JSONException ex) {
             ex.printStackTrace();
         }
-        Log.i("json", "Read character " + name + " from file " + filename +
-                ". Creating Character object ...");
+        Log.i("json", "Successfully read character " + name + " from file " + filename +
+                ". Creating Character object.");
 
         return new Character.CharBuilder(name)
                 .mu(attrList.get(0))
@@ -252,7 +267,7 @@ public class Json {
         //TODO create seperate attribute-dictionary in character json file
         JSONObject jobjChar = new JSONObject();
         try {
-            jobjChar.put(CHARACTER_NAME_KEY, name);
+            jobjChar.put(CF_KEY_CHARACTER_NAME, name);
             if (c.getMu() != 0) {
                 JSONObject attrObj = new JSONObject();
                 attrObj.put("MU", c.getMu());
@@ -263,7 +278,7 @@ public class Json {
                 attrObj.put("GE", c.getGe());
                 attrObj.put("KO", c.getKo());
                 attrObj.put("KK", c.getKk());
-                jobjChar.put(CHARACTER_ATTRIBUTE_KEY, attrObj);
+                jobjChar.put(CF_KEY_CHARACTER_ATTRIBUTE, attrObj);
             }
         } catch (JSONException er) {
             er.printStackTrace();
@@ -286,7 +301,7 @@ public class Json {
             ex.printStackTrace();
         }
 
-        File profileFile = new File(context.getFilesDir(), PROFILE_MAP);
+        File profileFile = new File(context.getFilesDir(), PROFILE_MAP_FILENAME);
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(profileFile));
             writer.write(jobjMap.toString());
