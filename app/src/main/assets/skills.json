@@ -1,357 +1,357 @@
 [
-  {
-    "id": 0,
-    "cat": "kp",
-    "name": "Fliegen",
-    "formula": "MU-IN-GE"
-  },
-  {
-    "id": 1,
-    "cat": "kp",
-    "name": "Gaukeleien",
-    "formula": "MU-CH-FF"
-  },
-  {
-    "id": 2,
-    "cat": "kp",
-    "name": "Klettern",
-    "formula": "MU-GE-KK"
-  },
-  {
-    "id": 3,
-    "cat": "kp",
-    "name": "Körperbeherrschung",
-    "formula": "GE-GE-KO"
-  },
-  {
-    "id": 4,
-    "cat": "kp",
-    "name": "Kraftakt",
-    "formula": "KO-KK-KK"
-  },
-  {
-    "id": 5,
-    "cat": "kp",
-    "name": "Reiten",
-    "formula": "CH-GE-KK"
-  },
-  {
-    "id": 6,
-    "cat": "kp",
-    "name": "Schwimmen",
-    "formula": "GE-KO-KK"
-  },
-  {
-    "id": 7,
-    "cat": "kp",
-    "name": "Selbstbeherrschung",
-    "formula": "MU-MU-KO"
-  },
-  {
-    "id": 8,
-    "cat": "kp",
-    "name": "Singen",
-    "formula": "KL-CH-KO"
-  },
-  {
-    "id": 9,
-    "cat": "kp",
-    "name": "Sinnesschärfe",
-    "formula": "KL-IN-IN"
-  },
-  {
-    "id": 10,
-    "cat": "kp",
-    "name": "Tanzen",
-    "formula": "KL-CH-GE"
-  },
-  {
-    "id": 11,
-    "cat": "kp",
-    "name": "Taschendiebstahl",
-    "formula": "MU-FF-GE"
-  },
-  {
-    "id": 12,
-    "cat": "kp",
-    "name": "Verbergen",
-    "formula": "MU-IN-GE"
-  },
-  {
-    "id": 13,
-    "cat": "kp",
-    "name": "Zechen",
-    "formula": "KL-KO-KK"
-  },
-  {
-    "id": 14,
-    "cat": "gs",
-    "name": "Bekehren & Überzeugen",
-    "formula": "MU-KL-CH"
-  },
-  {
-    "id": 15,
-    "cat": "gs",
-    "name": "Betören",
-    "formula": "MU-CH-CH"
-  },
-  {
-    "id": 16,
-    "cat": "gs",
-    "name": "Einschüchtern",
-    "formula": "MU-IN-CH"
-  },
-  {
-    "id": 17,
-    "cat": "gs",
-    "name": "Etikette",
-    "formula": "KL-IN-CH"
-  },
-  {
-    "id": 18,
-    "cat": "gs",
-    "name": "Gassenwissen",
-    "formula": "KL-IN-CH"
-  },
-  {
-    "id": 19,
-    "cat": "gs",
-    "name": "Menschenkenntnis",
-    "formula": "KL-IN-CH"
-  },
-  {
-    "id": 20,
-    "cat": "gs",
-    "name": "Überreden",
-    "formula": "MU-IN-CH"
-  },
-  {
-    "id": 21,
-    "cat": "gs",
-    "name": "Verkleiden",
-    "formula": "IN-CH-GE"
-  },
-  {
-    "id": 22,
-    "cat": "gs",
-    "name": "Willenskraft",
-    "formula": "MU-IN-CH"
-  },
-  {
-    "id": 23,
-    "cat": "nt",
-    "name": "Fährtensuchen",
-    "formula": "MU-IN-GE"
-  },
-  {
-    "id": 24,
-    "cat": "nt",
-    "name": "Fesseln",
-    "formula": "KL-FF-KK"
-  },
-  {
-    "id": 25,
-    "cat": "nt",
-    "name": "Fischen & Angeln",
-    "formula": "FF-GE-KO"
-  },
-  {
-    "id": 26,
-    "cat": "nt",
-    "name": "Orientierung",
-    "formula": "KL-IN-IN"
-  },
-  {
-    "id": 27,
-    "cat": "nt",
-    "name": "Pflanzenkunde",
-    "formula": "KL-FF-KO"
-  },
-  {
-    "id": 28,
-    "cat": "nt",
-    "name": "Tierkunde",
-    "formula": "MU-MU-CH"
-  },
-  {
-    "id": 29,
-    "cat": "nt",
-    "name": "Wildnisleben",
-    "formula": "MU-GE-KO"
-  },
-  {
-    "id": 30,
-    "cat": "ws",
-    "name": "Brett- & Glücksspiel",
-    "formula": "KL-KL-IN"
-  },
-  {
-    "id": 31,
-    "cat": "ws",
-    "name": "Geographie",
-    "formula": "KL-KL-IN"
-  },
-  {
-    "id": 32,
-    "cat": "ws",
-    "name": "Geschichtswissen",
-    "formula": "KL-KL-IN"
-  },
-  {
-    "id": 33,
-    "cat": "ws",
-    "name": "Götter & Kulte",
-    "formula": "KL-KL-IN"
-  },
-  {
-    "id": 34,
-    "cat": "ws",
-    "name": "Kriegskunst",
-    "formula": "MU-KL-IN"
-  },
-  {
-    "id": 35,
-    "cat": "ws",
-    "name": "Magiekunde",
-    "formula": "KL-KL-IN"
-  },
-  {
-    "id": 36,
-    "cat": "ws",
-    "name": "Mechanik",
-    "formula": "KL-KL-FF"
-  },
-  {
-    "id": 37,
-    "cat": "ws",
-    "name": "Rechnen",
-    "formula": "KL-KL-IN"
-  },
-  {
-    "id": 38,
-    "cat": "ws",
-    "name": "Rechtskunde",
-    "formula": "KL-KL-IN"
-  },
-  {
-    "id": 39,
-    "cat": "ws",
-    "name": "Sagen & Legenden",
-    "formula": "KL-KL-IN"
-  },
-  {
-    "id": 40,
-    "cat": "ws",
-    "name": "Sphärenkunde",
-    "formula": "KL-KL-IN"
-  },
-  {
-    "id": 41,
-    "cat": "ws",
-    "name": "Sternkunde",
-    "formula": "KL-KL-IN"
-  },
-  {
-    "id": 42,
-    "cat": "hw",
-    "name": "Alchimie",
-    "formula": "MU-KL-FF"
-  },
-  {
-    "id": 43,
-    "cat": "hw",
-    "name": "Boote & Schiffe",
-    "formula": "FF-GE-KK"
-  },
-  {
-    "id": 44,
-    "cat": "hw",
-    "name": "Fahrzeuge",
-    "formula": "CH-FF-KO"
-  },
-  {
-    "id": 45,
-    "cat": "hw",
-    "name": "Handel",
-    "formula": "KL-IN-CH"
-  },
-  {
-    "id": 46,
-    "cat": "hw",
-    "name": "Heilkunde Gift",
-    "formula": "MU-KL-IN"
-  },
-  {
-    "id": 47,
-    "cat": "hw",
-    "name": "Heilkunde Krankheiten",
-    "formula": "MU-IN-KO"
-  },
-  {
-    "id": 48,
-    "cat": "hw",
-    "name": "Heilkunde Seele",
-    "formula": "IN-CH-KO"
-  },
-  {
-    "id": 49,
-    "cat": "hw",
-    "name": "Heilkunde Wunden",
-    "formula": "KL-FF-FF"
-  },
-  {
-    "id": 50,
-    "cat": "hw",
-    "name": "Holzbearbeitung",
-    "formula": "FF-GE-KK"
-  },
-  {
-    "id": 51,
-    "cat": "hw",
-    "name": "Lebensmittelbearbeitung",
-    "formula": "IN-FF-FF"
-  },
-  {
-    "id": 52,
-    "cat": "hw",
-    "name": "Lederarbeiten",
-    "formula": "FF-GE-KO"
-  },
-  {
-    "id": 53,
-    "cat": "hw",
-    "name": "Malen & Zeichnen",
-    "formula": "IN-FF-FF"
-  },
-  {
-    "id": 54,
-    "cat": "hw",
-    "name": "Metallbearbeitung",
-    "formula": "FF-KO-KK"
-  },
-  {
-    "id": 55,
-    "cat": "hw",
-    "name": "Musizieren",
-    "formula": "CH-FF-KO"
-  },
-  {
-    "id": 56,
-    "cat": "hw",
-    "name": "Schlösserknacken",
-    "formula": "IN-FF-FF"
-  },
-  {
-    "id": 57,
-    "cat": "hw",
-    "name": "Steinbearbeitung",
-    "formula": "FF-FF-KK"
-  },
-  {
-    "id": 58,
-    "cat": "hw",
-    "name": "Stoffbearbeitung",
-    "formula": "KL-FF-FF"
-  }
-]
+    {
+      "id": 0,
+      "cat": "kp",
+      "name": "Fliegen",
+      "formula": "MU-IN-GE"
+    },
+    {
+      "id": 1,
+      "cat": "kp",
+      "name": "Gaukeleien",
+      "formula": "MU-CH-FF"
+    },
+    {
+      "id": 2,
+      "cat": "kp",
+      "name": "Klettern",
+      "formula": "MU-GE-KK"
+    },
+    {
+      "id": 3,
+      "cat": "kp",
+      "name": "Körperbeherrschung",
+      "formula": "GE-GE-KO"
+    },
+    {
+      "id": 4,
+      "cat": "kp",
+      "name": "Kraftakt",
+      "formula": "KO-KK-KK"
+    },
+    {
+      "id": 5,
+      "cat": "kp",
+      "name": "Reiten",
+      "formula": "CH-GE-KK"
+    },
+    {
+      "id": 6,
+      "cat": "kp",
+      "name": "Schwimmen",
+      "formula": "GE-KO-KK"
+    },
+    {
+      "id": 7,
+      "cat": "kp",
+      "name": "Selbstbeherrschung",
+      "formula": "MU-MU-KO"
+    },
+    {
+      "id": 8,
+      "cat": "kp",
+      "name": "Singen",
+      "formula": "KL-CH-KO"
+    },
+    {
+      "id": 9,
+      "cat": "kp",
+      "name": "Sinnesschärfe",
+      "formula": "KL-IN-IN"
+    },
+    {
+      "id": 10,
+      "cat": "kp",
+      "name": "Tanzen",
+      "formula": "KL-CH-GE"
+    },
+    {
+      "id": 11,
+      "cat": "kp",
+      "name": "Taschendiebstahl",
+      "formula": "MU-FF-GE"
+    },
+    {
+      "id": 12,
+      "cat": "kp",
+      "name": "Verbergen",
+      "formula": "MU-IN-GE"
+    },
+    {
+      "id": 13,
+      "cat": "kp",
+      "name": "Zechen",
+      "formula": "KL-KO-KK"
+    },
+    {
+      "id": 14,
+      "cat": "gs",
+      "name": "Bekehren & Überzeugen",
+      "formula": "MU-KL-CH"
+    },
+    {
+      "id": 15,
+      "cat": "gs",
+      "name": "Betören",
+      "formula": "MU-CH-CH"
+    },
+    {
+      "id": 16,
+      "cat": "gs",
+      "name": "Einschüchtern",
+      "formula": "MU-IN-CH"
+    },
+    {
+      "id": 17,
+      "cat": "gs",
+      "name": "Etikette",
+      "formula": "KL-IN-CH"
+    },
+    {
+      "id": 18,
+      "cat": "gs",
+      "name": "Gassenwissen",
+      "formula": "KL-IN-CH"
+    },
+    {
+      "id": 19,
+      "cat": "gs",
+      "name": "Menschenkenntnis",
+      "formula": "KL-IN-CH"
+    },
+    {
+      "id": 20,
+      "cat": "gs",
+      "name": "Überreden",
+      "formula": "MU-IN-CH"
+    },
+    {
+      "id": 21,
+      "cat": "gs",
+      "name": "Verkleiden",
+      "formula": "IN-CH-GE"
+    },
+    {
+      "id": 22,
+      "cat": "gs",
+      "name": "Willenskraft",
+      "formula": "MU-IN-CH"
+    },
+    {
+      "id": 23,
+      "cat": "nt",
+      "name": "Fährtensuchen",
+      "formula": "MU-IN-GE"
+    },
+    {
+      "id": 24,
+      "cat": "nt",
+      "name": "Fesseln",
+      "formula": "KL-FF-KK"
+    },
+    {
+      "id": 25,
+      "cat": "nt",
+      "name": "Fischen & Angeln",
+      "formula": "FF-GE-KO"
+    },
+    {
+      "id": 26,
+      "cat": "nt",
+      "name": "Orientierung",
+      "formula": "KL-IN-IN"
+    },
+    {
+      "id": 27,
+      "cat": "nt",
+      "name": "Pflanzenkunde",
+      "formula": "KL-FF-KO"
+    },
+    {
+      "id": 28,
+      "cat": "nt",
+      "name": "Tierkunde",
+      "formula": "MU-MU-CH"
+    },
+    {
+      "id": 29,
+      "cat": "nt",
+      "name": "Wildnisleben",
+      "formula": "MU-GE-KO"
+    },
+    {
+      "id": 30,
+      "cat": "ws",
+      "name": "Brett- & Glücksspiel",
+      "formula": "KL-KL-IN"
+    },
+    {
+      "id": 31,
+      "cat": "ws",
+      "name": "Geographie",
+      "formula": "KL-KL-IN"
+    },
+    {
+      "id": 32,
+      "cat": "ws",
+      "name": "Geschichtswissen",
+      "formula": "KL-KL-IN"
+    },
+    {
+      "id": 33,
+      "cat": "ws",
+      "name": "Götter & Kulte",
+      "formula": "KL-KL-IN"
+    },
+    {
+      "id": 34,
+      "cat": "ws",
+      "name": "Kriegskunst",
+      "formula": "MU-KL-IN"
+    },
+    {
+      "id": 35,
+      "cat": "ws",
+      "name": "Magiekunde",
+      "formula": "KL-KL-IN"
+    },
+    {
+      "id": 36,
+      "cat": "ws",
+      "name": "Mechanik",
+      "formula": "KL-KL-FF"
+    },
+    {
+      "id": 37,
+      "cat": "ws",
+      "name": "Rechnen",
+      "formula": "KL-KL-IN"
+    },
+    {
+      "id": 38,
+      "cat": "ws",
+      "name": "Rechtskunde",
+      "formula": "KL-KL-IN"
+    },
+    {
+      "id": 39,
+      "cat": "ws",
+      "name": "Sagen & Legenden",
+      "formula": "KL-KL-IN"
+    },
+    {
+      "id": 40,
+      "cat": "ws",
+      "name": "Sphärenkunde",
+      "formula": "KL-KL-IN"
+    },
+    {
+      "id": 41,
+      "cat": "ws",
+      "name": "Sternkunde",
+      "formula": "KL-KL-IN"
+    },
+    {
+      "id": 42,
+      "cat": "hw",
+      "name": "Alchimie",
+      "formula": "MU-KL-FF"
+    },
+    {
+      "id": 43,
+      "cat": "hw",
+      "name": "Boote & Schiffe",
+      "formula": "FF-GE-KK"
+    },
+    {
+      "id": 44,
+      "cat": "hw",
+      "name": "Fahrzeuge",
+      "formula": "CH-FF-KO"
+    },
+    {
+      "id": 45,
+      "cat": "hw",
+      "name": "Handel",
+      "formula": "KL-IN-CH"
+    },
+    {
+      "id": 46,
+      "cat": "hw",
+      "name": "Heilkunde Gift",
+      "formula": "MU-KL-IN"
+    },
+    {
+      "id": 47,
+      "cat": "hw",
+      "name": "Heilkunde Krankheiten",
+      "formula": "MU-IN-KO"
+    },
+    {
+      "id": 48,
+      "cat": "hw",
+      "name": "Heilkunde Seele",
+      "formula": "IN-CH-KO"
+    },
+    {
+      "id": 49,
+      "cat": "hw",
+      "name": "Heilkunde Wunden",
+      "formula": "KL-FF-FF"
+    },
+    {
+      "id": 50,
+      "cat": "hw",
+      "name": "Holzbearbeitung",
+      "formula": "FF-GE-KK"
+    },
+    {
+      "id": 51,
+      "cat": "hw",
+      "name": "Lebensmittelbearbeitung",
+      "formula": "IN-FF-FF"
+    },
+    {
+      "id": 52,
+      "cat": "hw",
+      "name": "Lederarbeiten",
+      "formula": "FF-GE-KO"
+    },
+    {
+      "id": 53,
+      "cat": "hw",
+      "name": "Malen & Zeichnen",
+      "formula": "IN-FF-FF"
+    },
+    {
+      "id": 54,
+      "cat": "hw",
+      "name": "Metallbearbeitung",
+      "formula": "FF-KO-KK"
+    },
+    {
+      "id": 55,
+      "cat": "hw",
+      "name": "Musizieren",
+      "formula": "CH-FF-KO"
+    },
+    {
+      "id": 56,
+      "cat": "hw",
+      "name": "Schlösserknacken",
+      "formula": "IN-FF-FF"
+    },
+    {
+      "id": 57,
+      "cat": "hw",
+      "name": "Steinbearbeitung",
+      "formula": "FF-FF-KK"
+    },
+    {
+      "id": 58,
+      "cat": "hw",
+      "name": "Stoffbearbeitung",
+      "formula": "KL-FF-FF"
+    }
+  ]
 
