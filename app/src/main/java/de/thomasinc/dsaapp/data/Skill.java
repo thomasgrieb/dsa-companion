@@ -14,11 +14,35 @@ public class Skill {
     private String cat;
 
 
-    public Skill(String name, int id, String cat, Formula formula) {
-        this.formula = formula;
-        this.name = name;
-        this.id = id;
-        this.cat = cat;
+    public Skill() { }
+
+    public static class SkillBuilder {
+
+        private final String name;
+        private final Formula formula;
+        private int id;
+        private final String cat;
+
+        public SkillBuilder(String name, String cat, Formula formula){
+            this.formula = formula;
+            this.name = name;
+            this.cat = cat;
+            // TODO default for id necessary?
+        }
+
+        public SkillBuilder id(int id){
+            this.id = id;
+            return this;
+        }
+
+        public Skill build(){
+            Skill s = new Skill();
+            s.cat = this.cat;
+            s.name = this.name;
+            s.id = this.id;
+            s.formula = this.formula;
+            return s;
+        }
     }
 
     public String getName() {
@@ -41,11 +65,8 @@ public class Skill {
         return cat;
     }
 
-
-    /**
-     * @return name and complete formula in pretty print
-     */
-    public String print() {
-        return name + ": " + formula.getFirst() + "-" + formula.getSecond() + "-" + formula.getThird();
+    @Override
+    public String toString() {
+        return name;
     }
 }
