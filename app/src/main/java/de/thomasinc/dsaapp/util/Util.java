@@ -17,53 +17,20 @@ public class Util {
 
 
     /**
-     * Uses the {@link String} generated in {@link Json#readSkillsJson(Context)} to generate a
-     *  {@link JSONObject}, where the keys are the skill categories and its values the skills of
-     *  the category. Creates {@link ArrayList} of skill categories.
-     * @param context application context needed for filepath
-     * @return String-array of skill categories
+     * Finds all skills of a specific cat in the provided list.
+     *
+     * @param skillList list of all skills
+     * @param cat       skill category to search for
+     * @return list of all skills of category cat
      */
-    public static String[] getSkillKats(Context context){
-        ArrayList<String> kats = new ArrayList<>();
-        try {
-            JSONObject obj = new JSONObject(Json.readSkillsJson(context));
-            Iterator<String> it= obj.keys();
-            while(it.hasNext()){
-                kats.add(it.next());
+    public static ArrayList<Skill> getSkillsOfCat(ArrayList<Skill> skillList, SkillCat cat) {
+        ArrayList<Skill> skillListOfCat = new ArrayList<>();
+        for (Skill skill : skillList) {
+            if (skill.getCat().equals(cat.getAbbr())) {
+                skillListOfCat.add(skill);
             }
-        } catch (JSONException er){
-            er.printStackTrace();
         }
-        return kats.toArray(new String[5]);
-    }
-
-    /**
-     * Reads the skills of a specific category from a {@link JSONObject} generated from the String
-     *  from {@link Json#readSkillsJson(Context)}. Collects them in a {@link HashMap}, where the name of
-     *  the skill as {@link String} is the key and a {@link Skill} object its value.
-     * @param context application context needed for filepath
-     * @param kat
-     * @return {@link HashMap} object containing all skills of category kat as
-     *  {@link String}:{@link Skill} pairs
-     */
-    public static HashMap<String,Skill> getSkillsOfCat(Context context, String kat){
-        HashMap<String,Skill> skillmap = new HashMap<>();
-        try{
-            JSONObject obj = new JSONObject(Json.readSkillsJson(context)).getJSONObject(kat);
-            Iterator<String> it = obj.keys();
-            String entry;
-            Formula f;
-            String[] fAr;
-            while (it.hasNext()){
-                entry = it.next();
-                fAr = obj.getString(entry).split("-");
-                f = new Formula(fAr[0],fAr[1],fAr[2]);
-                skillmap.put(entry,new Skill(entry,f));
-            }
-        } catch (JSONException er){
-            er.printStackTrace();
-        }
-        return skillmap;
+        return skillListOfCat;
     }
 
     /**
