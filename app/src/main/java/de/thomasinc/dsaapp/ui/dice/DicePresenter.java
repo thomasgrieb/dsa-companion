@@ -3,10 +3,12 @@ package de.thomasinc.dsaapp.ui.dice;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import java.util.Set;
+import java.util.ArrayList;
 
 import de.thomasinc.dsaapp.data.DiceModel;
 import de.thomasinc.dsaapp.data.RollResult;
+import de.thomasinc.dsaapp.data.Skill;
+import de.thomasinc.dsaapp.data.SkillCat;
 import de.thomasinc.dsaapp.ui.DsaPresenter;
 import de.thomasinc.dsaapp.util.ConstantsGlobal;
 import de.thomasinc.dsaapp.util.Json;
@@ -26,7 +28,7 @@ public class DicePresenter implements DsaPresenter {
 
     /**
      * Links the view
-     * Initializes model with character and skillmap (from context)
+     * Initializes model with character and skill map (from context)
      *
      * @param view    corresponding view
      * @param context corresponding model
@@ -39,40 +41,45 @@ public class DicePresenter implements DsaPresenter {
         this.pref = context.getSharedPreferences(ConstantsGlobal.PREFERENCES_FILE, 0);
         this.view = view;
         this.model = new DiceModel(Json.readCharFromJson(context, fetchCurrentCharacterFromPref()),
-                Util.makeSkillMap(context));
+                Json.makeSkillsFromJson(context), Json.makeCatsFromJson(context));
     }
 
     /**
      * Fills the category dropdown menu.
-     * Fetches the categories from the skillmap, converts them to a {@link String} array and calls
+     * Fetches the category list from the model, converts it to a {@link SkillCat} array and calls
      * {@link DiceActivity#fillCatDropdown}.
      */
     public void fillCatDropdown() {
-        String[] catsAr = new String[model.getSkillMap().size()];
-        catsAr = model.getSkillMap().keySet().toArray(catsAr);
+        SkillCat[] catsAr = new SkillCat[0];
+        catsAr = model.getSkillCatList().toArray(catsAr);
         view.fillCatDropdown(catsAr);
     }
 
     /**
-     * Fills the category dropdown menu.
-     * Fetches the skills from the skillmap, converts them to a {@link String} array and calls
-     * {@link DiceActivity#fillSkillDropdown}.
+     * Fills the skill dropdown menu.
+     * Sets current category in model. Then uses {@link Util#getSkillsOfCat} to get a list of all
+     * skills in that category, converts it to a {@link Skill} array and
+     * calls {@link DiceActivity#fillSkillDropdown}.
      *
      * @param cat currently chosen category, used to set current category
      */
-    public void fillSkillDropdown(String cat) {
+    public void fillSkillDropdown(SkillCat cat) {
         model.setCurrentCat(cat);
         try {
-            Set<String> skills = model.getSkillMap().get(model.getCurrentCat()).keySet();
-            String[] skillsAr = new String[skills.size()];
-            skillsAr = skills.toArray(skillsAr);
+            ArrayList<Skill> skillList = Util.getSkillsOfCat(model.getSkillList(),
+                    model.getCurrentCat());
+            Skill[] skillsAr = new Skill[0];
+            skillsAr = skillList.toArray(skillsAr);
             view.fillSkillDropdown(skillsAr);
         } catch (NullPointerException e) {
-            view.onError(e.toString());
+            e.printStackTrace();
         }
 
     }
 
+    /**
+     * Requests roll from model.
+     */
     public void requestRoll() {
         if (model.getCurrentSkill() == null) {
             view.onError("Keine Fähigkeit ausgewählt!");
@@ -89,19 +96,13 @@ public class DicePresenter implements DsaPresenter {
      *
      * @param skill chosen skill
      */
-    public void updateSkillLabel(String skill) {
+    public void updateSkill(Skill skill) {
         model.setCurrentSkill(skill);
         try {
-            view.setSkillInfo(model.getCurrentSkill());
-            view.setSkillFormula(
-                    model.getSkillMap()
-                            .get(model.getCurrentCat())
-                            .get(model.getCurrentSkill())
-                            .getFormula()
-                            .print()
-            );
+            view.setSkillInfo(model.getCurrentSkill().getName());
+            view.setSkillFormula(model.getCurrentSkill().getFormula().print());
         } catch (NullPointerException e) {
-            view.onError(e.toString());
+            e.printStackTrace();
         }
 
     }

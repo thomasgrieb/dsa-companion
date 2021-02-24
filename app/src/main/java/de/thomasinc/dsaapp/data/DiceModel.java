@@ -1,5 +1,6 @@
 package de.thomasinc.dsaapp.data;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
@@ -7,15 +8,18 @@ import de.thomasinc.dsaapp.data.character.Character;
 
 public class DiceModel implements DsaModel{
 
-    private final HashMap<String, HashMap<String,Skill>> skillMap;
+    private final ArrayList<Skill> skillList;
+    private final ArrayList<SkillCat> skillCatList;
     private final Character character;
-    private String currentCat;
-    private String currentSkill;
+    private SkillCat currentCat;
+    private Skill currentSkill;
 
 
-    public DiceModel(Character character, HashMap<String, HashMap<String,Skill>> skillMap){
+    public DiceModel(Character character, ArrayList<Skill> skillList,
+                     ArrayList<SkillCat> skillCatList){
         this.character = character;
-        this.skillMap = skillMap;
+        this.skillList = skillList;
+        this.skillCatList = skillCatList;
     }
 
     /**
@@ -24,7 +28,7 @@ public class DiceModel implements DsaModel{
      */
     public RollResult roll(){
         //TODO: fix possible Nullpointer
-        Formula formula = skillMap.get(currentCat).get(currentSkill).getFormula();
+        Formula formula = currentSkill.getFormula();
 
         //TODO: if available, get char skill value and use as bonus
         int bonus = 0;
@@ -53,23 +57,27 @@ public class DiceModel implements DsaModel{
         return character;
     }
 
-    public HashMap<String, HashMap<String, Skill>> getSkillMap() {
-        return skillMap;
+    public ArrayList<Skill> getSkillList() {
+        return skillList;
     }
 
-    public String getCurrentCat() {
+    public ArrayList<SkillCat> getSkillCatList() {
+        return skillCatList;
+    }
+
+    public SkillCat getCurrentCat() {
         return currentCat;
     }
 
-    public void setCurrentCat(String currentCat) {
+    public void setCurrentCat(SkillCat currentCat) {
         this.currentCat = currentCat;
     }
 
-    public String getCurrentSkill() {
+    public Skill getCurrentSkill() {
         return currentSkill;
     }
 
-    public void setCurrentSkill(String currentSkill) {
+    public void setCurrentSkill(Skill currentSkill) {
         this.currentSkill = currentSkill;
     }
 
