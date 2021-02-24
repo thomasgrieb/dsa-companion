@@ -3,22 +3,22 @@ package de.thomasinc.dsaapp.data;
 /**
  * Skill-Object class
  * Portrays an individual skill by saving its name as String and the formula to calculate it as
- *  {@link Formula} object.
+ * {@link Formula} object.
  */
 
 public class Skill {
 
     private String name;
     private Formula formula;
+    private int id;
+    private String cat;
 
-    /**
-     * Constructer
-     * @param name name of the skill as String
-     * @param formula {@link Formula} object that implements the formula required for calculation
-     */
-    public Skill(String name, Formula formula){
+
+    public Skill(String name, int id, String cat, Formula formula) {
         this.formula = formula;
         this.name = name;
+        this.id = id;
+        this.cat = cat;
     }
 
     public String getName() {
@@ -33,14 +33,19 @@ public class Skill {
         return formula;
     }
 
-    public void setFormula(Formula formula) {
-        this.formula = formula;
+    public int getId() {
+        return id;
     }
+
+    public String getCat() {
+        return cat;
+    }
+
 
     /**
      * @return name and complete formula in pretty print
      */
-    public String print(){
-        return name+": "+formula.getFirst()+"-"+formula.getSecond()+"-"+formula.getThird();
+    public String print() {
+        return name + ": " + formula.getFirst() + "-" + formula.getSecond() + "-" + formula.getThird();
     }
 }
