@@ -3,6 +3,7 @@ package de.thomasinc.dsaapp.util;
 import android.content.Context;
 import android.util.Log;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -11,12 +12,14 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import de.thomasinc.dsaapp.data.Formula;
+import de.thomasinc.dsaapp.data.Skill;
+import de.thomasinc.dsaapp.data.SkillCat;
 import de.thomasinc.dsaapp.data.character.Character;
 
 /**
@@ -35,22 +38,87 @@ public class Json {
      * Reads the skills from the json file saved in the apps' assets folder
      *
      * @param context application context needed for filepath
-     * @return {@link String} of skills
+     * @return map of skill id : skill object
      */
-    public static String readSkillsJson(Context context) {
-        String json = null;
+    public static ArrayList<Skill> makeSkillsFromJson(Context context) {
+        ArrayList<Skill> skills = new ArrayList<>();
+        String json = readJsonFromAssets(context, SKILL_FILENAME);
         try {
-            InputStream file = context.getAssets().open("skills.json");
-            int size = file.available();
-            byte[] buffer = new byte[size];
-            file.read(buffer);
-            file.close();
-            json = new String(buffer, StandardCharsets.UTF_8);
+            assert json != null;
+            JSONArray skillArr = new JSONArray(json);
+            for (int i = 0; i < skillArr.length(); i++) {
+                JSONObject skillObj = skillArr.getJSONObject(i);
+                skills.add(new Skill.SkillBuilder(
+                                skillObj.getString(SF_SKILL_NAME),
+                                skillObj.getString(SF_SKILL_CAT),
+                                new Formula(skillObj.getString(SF_SKILL_FORMULA))
+                        )
+                                .id(skillObj.getInt(SF_SKILL_ID))
+                                .build()
+                );
+            }
+            Log.i("json", "Successfully created skill list.");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return skills;
+    }
+
+    /**
+     * Internal function.
+     * Reads any file from internal file folder.
+     *
+     * @param context  application context
+     * @param filename name of file
+     * @return single {@link String} containing the entire file
+     */
+    private static String readJsonFromAssets(Context context, String filename) {
+        StringBuilder json = new StringBuilder();
+        try {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(
+                    context.getAssets().open(filename), StandardCharsets.UTF_8));
+            String line = reader.readLine();
+            while (line != null) {
+                json.append(line);
+                line = reader.readLine();
+            }
+            reader.close();
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-        return json;
+        if (json != null) {
+            Log.i("json", "Successfully read file " + filename + ".");
+        } else {
+            Log.e("json", "Warning: File " + filename + " is empty or doesn't exist!");
+        }
+        return json.toString();
     }
+
+    /**
+     * Reads the skill categories from the json file saved in the apps' assets folder
+     *
+     * @param context application context
+     * @return list of skill categories
+     */
+    public static ArrayList<SkillCat> makeCatsFromJson(Context context) {
+        String json = readJsonFromAssets(context, SKILL_CATS_FILENAME);
+        System.out.println("jsonraw " + json);
+        ArrayList<SkillCat> catList = new ArrayList<>();
+        try {
+            assert json != null;
+            JSONObject catsObj = new JSONObject(json);
+            Iterator<String> it = catsObj.keys();
+            while (it.hasNext()) {
+                String key = it.next();
+                catList.add(new SkillCat(catsObj.getString(key), key));
+            }
+            Log.i("json", "Successfully created skill category list.");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return catList;
+    }
+
 
     /**
      * Checks whether the profile map file exists.
