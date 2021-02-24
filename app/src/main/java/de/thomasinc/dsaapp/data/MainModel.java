@@ -4,23 +4,23 @@ import java.util.Set;
 
 public class MainModel implements DsaModel{
 
-    private Set<String> profiles;
-    private String currentProfile;
+    private final Set<String> characters;
+    private String currentCharacter;
 
-    public MainModel(Set<String> profiles){
-        this.profiles = profiles;
+    public MainModel(Set<String> characters){
+        this.characters = characters;
     }
 
-    public void setCurrentCharacter(String currentProfile) {
-        this.currentProfile = currentProfile;
+    public void setCurrentCharacter(String currentCharacter) {
+        this.currentCharacter = currentCharacter;
     }
 
-    public String getCurrentProfile() {
-        return currentProfile;
+    public String getCurrentCharacter() {
+        return currentCharacter;
     }
 
     public Set<String> getCharacters() {
-        return profiles;
+        return characters;
     }
 
     @Override
