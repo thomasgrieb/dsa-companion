@@ -1,17 +1,13 @@
 package de.thomasinc.dsaapp.util;
-import android.content.Context;
-import android.widget.EditText;
 
-import org.json.JSONException;
-import org.json.JSONObject;
+import android.content.Context;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 
-import de.thomasinc.dsaapp.data.character.Character;
-import de.thomasinc.dsaapp.data.Formula;
 import de.thomasinc.dsaapp.data.Skill;
+import de.thomasinc.dsaapp.data.SkillCat;
+import de.thomasinc.dsaapp.data.character.Character;
 
 /**
  * Utility helper class that implements various methods needed in several places of the app
@@ -19,33 +15,6 @@ import de.thomasinc.dsaapp.data.Skill;
 
 public class Util {
 
-    public static HashMap<String,HashMap<String,Skill>> makeSkillMap(Context context){
-        HashMap<String,HashMap<String,Skill>> skills = new HashMap<>();
-
-        try {
-            JSONObject obj = new JSONObject(Json.readSkillsJson(context));
-            Iterator<String> it= obj.keys();
-            while(it.hasNext()) {
-                String cat = it.next();
-                JSONObject subobj = obj.getJSONObject(cat);
-                skills.put(cat, new HashMap<>());
-                Iterator<String> itSk = subobj.keys();
-                String entry;
-                Formula f;
-                String[] fAr;
-                while (itSk.hasNext()) {
-                    entry = itSk.next();
-                    fAr = subobj.getString(entry).split("-");
-                    f = new Formula(fAr[0], fAr[1], fAr[2]);
-                    skills.get(cat).put(entry, new Skill(entry, f));
-                }
-            }
-        } catch (JSONException er) {
-            er.printStackTrace();
-        }
-
-        return skills;
-    }
 
     /**
      * Uses the {@link String} generated in {@link Json#readSkillsJson(Context)} to generate a
@@ -100,7 +69,7 @@ public class Util {
     /**
      * Creates a {@link HashMap} containing {@link Skill}:{@link Integer}(0) pairs for every
      *  existing skill in skill.json in order to initialize an empty characters skill sheet.
-     * Uses the {@link Json#readSkillsJson(Context)} method to get a list of categories, loops over the
+     * Uses the {@link Json#makeSkillsFromJson(Context)} method to get a list of categories, loops over the
      *  result and uses the {@link #getSkillsOfCat(Context, String)} method to create a
      *  {@link Skill} array of all skills in that category. Lastly, the list is appended to a
      *  predefined {@link HashMap} and each key is assigned the value 0.
@@ -110,6 +79,7 @@ public class Util {
      * @param context
      * @return {@link HashMap} of {@link Skill}:{@link Integer} pairs
      */
+    /*
     public static HashMap<Skill,Integer> initializeSkillValueMap(Context context){
         HashMap<Skill,Integer> skillValueMap = new HashMap<>();
         try{
@@ -128,8 +98,11 @@ public class Util {
         return skillValueMap;
     }
 
+     */
+
     /**
      * Function for checking whether a text is empty or not
+     *
      * @param text text to check
      * @return false if not empty, true if empty
      */
@@ -138,45 +111,23 @@ public class Util {
     }
 
     /**
-     * Function for checking whether an Array of EditText-Objects includes any unfilled fields
-     * @param array array of {@link EditText} objects
-     * @return boolean, false if none empty, true if any empty
-     */
-    public static boolean checkIfAnyEmptyArray(String[] array) {
-        for (int i = 0; i < 8; i++) {
-            if (Util.checkIfEmpty(array[i])) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /**
-     *
-     * @param context application context needed for filepath
-     * @return boolean indicating whether any charfile exists (true if it exists)
-     */
-    public static boolean checkIfCharExists(Context context) {
-        return context.getFileStreamPath("myCharacter.json").exists();
-    }
-
-    /**
      * Normalizes text by: \
      * trimming excess whitespace and replacing spaces with underscores \
      * setting to lowercase \
      * replacing umlauts \
      * removing punctuation
+     *
      * @param text any {@link String}
      * @return a normalized version that can be used as filename etc.
      */
-    public static String normalizeString(String text){
-        String textNoWhitespace = text.trim().replaceAll(" ","_");
+    public static String normalizeString(String text) {
+        String textNoWhitespace = text.trim().replaceAll(" ", "_");
         String textLower = textNoWhitespace.toLowerCase();
         String textAscii = textLower
-                .replaceAll("ä","ae")
-                .replaceAll("ö","oe")
-                .replaceAll("ü","ue");
-        return textAscii.replaceAll("[+-.,;]","");
+                .replaceAll("ä", "ae")
+                .replaceAll("ö", "oe")
+                .replaceAll("ü", "ue");
+        return textAscii.replaceAll("[+-.,;]", "");
     }
 
 }
